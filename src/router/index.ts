@@ -1,10 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import Layout from '@/components/Layout/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Dashboard',
-    component: () => import('@/views/dashboard/index.vue')
+    component: Layout
+    // component: () => import('@/views/dashboard/index.vue')
   }
 ]
 
