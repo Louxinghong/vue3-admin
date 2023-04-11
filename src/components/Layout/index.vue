@@ -1,18 +1,23 @@
 <template>
   <div class="layout">
-    <side-bar></side-bar>
+    <side-bar class="side-container"></side-bar>
 
-    <nav-bar></nav-bar>
+    <nav-bar class="nav-container"></nav-bar>
 
-    <main-container></main-container>
+    <main-container class="main-container"></main-container>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
 import SideBar from './components/SideBar/index.vue'
 import NavBar from './components/NavBar/index.vue'
 import MainContainer from './components/MainContainer/index.vue'
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.side-container {
+  width: 200px;
+  height: 100vh;
+  background: rgb(219, 218, 218);
+}
+</style>

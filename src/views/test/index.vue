@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { watch } from 'fs'
 import { ref, toRef, reactive, computed } from 'vue'
 import TestSon from './components/TestSon.vue'
 

@@ -1,19 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Layout from '@/components/Layout/index.vue'
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Dashboard',
-    component: Layout
-    // component: () => import('@/views/dashboard/index.vue')
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    component: () => import('@/views/test/index.vue')
-  }
-]
+const requireRoutes = import.meta.globEager('./routes/*.ts')
+const allRoutes = Object.keys(requireRoutes).reduce((total, path: string) => {
+  total = total.concat(requireRoutes[path].routes)
+  return total
+}, [])
+
+const routes: Array<RouteRecordRaw> = allRoutes
 
 const router = createRouter({
   history: createWebHashHistory(),
