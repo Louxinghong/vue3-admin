@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
-const requireRoutes = import.meta.globEager('./routes/*.ts')
+const requireRoutes = import.meta.glob('./routes/*.ts', { eager: true })
 const allRoutes = Object.keys(requireRoutes).reduce((total, path: string) => {
   total = total.concat(requireRoutes[path].routes)
   return total

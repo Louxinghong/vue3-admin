@@ -6,6 +6,7 @@ export const routes = [
     name: 'Test',
     redirect: '/test/test-son',
     component: Layout,
+    meta: { title: '测试管理', icon: 'person' },
     children: [
       {
         path: 'test-son',

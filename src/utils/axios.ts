@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { Message } from '@arco-design/web-vue'
 
 const baseURL = 'https://api.bilibili.com'
 
@@ -22,7 +22,7 @@ axios.interceptors.response.use(
     return data
   },
   (error) => {
-    ElMessage.error(error)
+    Message.error(error)
     return Promise.reject(error)
   }
 )

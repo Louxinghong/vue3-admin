@@ -6,12 +6,13 @@ export const routes = [
     name: 'Dashboard',
     redirect: '/dashboard',
     component: Layout,
+    isDashboard: true,
+    meta: { title: '首页', icon: 'person' },
     children: [
       {
         path: 'dashboard',
         name: 'Dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
-        meta: { title: '首页', icon: '' }
+        component: () => import('@/views/dashboard/index.vue')
       }
     ]
   }

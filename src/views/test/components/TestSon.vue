@@ -1,7 +1,7 @@
 <template>
   <div class="test-son">
     <h2>{{ count }}</h2>
-    <el-button type="primary" @click="onAddCount">点我count+1</el-button>
+    <a-button type="primary" @click="onAddCount">点我count+1</a-button>
   </div>
 </template>
 

@@ -4,7 +4,7 @@
 
     <span>state.count: {{ state.count }}</span>
     <span>computedEven2: {{ computedEven2 }}</span>
-    <el-button type="primary" @click="onChangeComputed">改变计算属性</el-button>
+    <a-button type="primary" @click="onChangeComputed">改变计算属性</a-button>
   </div>
 </template>
 

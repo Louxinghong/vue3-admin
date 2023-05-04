@@ -1,10 +1,10 @@
 <template>
   <div class="layout">
-    <side-bar class="side-container"></side-bar>
+    <side-bar></side-bar>
 
-    <nav-bar class="nav-container"></nav-bar>
+    <nav-bar></nav-bar>
 
-    <main-container class="main-container"></main-container>
+    <main-container></main-container>
   </div>
 </template>
 
@@ -15,9 +15,27 @@ import MainContainer from './components/MainContainer/index.vue'
 </script>
 
 <style lang="scss" scoped>
-.side-container {
-  width: 200px;
-  height: 100vh;
-  background: rgb(219, 218, 218);
+.side-bar {
+  width: 250px;
+  background: #fff;
+  box-shadow: 1px 0px 10px 1px #c1c1c1;
+}
+
+.nav-bar {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: calc(100% - 250px);
+  height: 60px;
+  background: #c1c1c1;
+}
+
+.main-container {
+  position: absolute;
+  top: 60px;
+  left: 250px;
+  height: calc(100% - 60px);
+  width: calc(100% - 250px);
+  background: crimson;
 }
 </style>
