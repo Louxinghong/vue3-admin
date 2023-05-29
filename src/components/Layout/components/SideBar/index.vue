@@ -1,6 +1,10 @@
 <template>
   <div class="side-bar">
-    <a-menu :default-open-keys="['0']" :default-selected-keys="['0_1']">
+    <a-menu
+      :auto-scroll-into-view="true"
+      :auto-open-selected="true"
+      :default-selected-keys="[useRouter().currentRoute.value.path]"
+    >
       <router-link to="/">
         <a-menu-item class="route-header" :key="routeHeader.path">
           <template #icon>
@@ -18,10 +22,11 @@
 <script lang="ts" setup>
 import router from '@/router/index'
 import BarItem from './components/BarItem.vue'
+import { useRouter } from 'vue-router'
 
 const routeHeader = router.options.routes[0]
 const routeList = router.options.routes.slice(1)
-console.log(router.options.routes)
+console.log(useRouter().currentRoute.value)
 </script>
 
 <style lang="scss" scoped>
@@ -48,18 +53,10 @@ console.log(router.options.routes)
     }
   }
 
-  .arco-menu-item {
-    padding: 4px 12px;
-
-    &.arco-menu-selected {
-      background: rgba(24, 144, 255, 0.1);
-    }
-  }
-
   .route-header {
     font-size: 20px;
     font-weight: bolder;
-    color: #165dff;
+    color: #1890ff;
 
     span {
       display: inline-block;
@@ -72,7 +69,7 @@ console.log(router.options.routes)
 
     &:hover {
       background: #fff;
-      color: #165dff;
+      color: #1890ff;
     }
   }
 }

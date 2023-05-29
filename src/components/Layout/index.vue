@@ -34,8 +34,10 @@ import MainContainer from './components/MainContainer/index.vue'
   position: absolute;
   top: 60px;
   left: 250px;
+  padding: 10px;
   height: calc(100% - 60px);
   width: calc(100% - 250px);
-  background: crimson;
+  overflow-y: scroll;
+  background: rgb(216, 216, 216);
 }
 </style>

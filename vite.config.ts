@@ -1,6 +1,6 @@
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path-browserify'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { resolve } from 'path'
 
 export default () => {
   return {
@@ -27,6 +27,7 @@ export default () => {
     ],
     resolve: {
       alias: {
+        path: 'path-browserify',
         '@': resolve(__dirname, 'src')
       }
     },

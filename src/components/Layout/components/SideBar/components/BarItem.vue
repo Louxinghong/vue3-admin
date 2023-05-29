@@ -2,7 +2,7 @@
   <div class="bar-item">
     <template v-for="item in props.routes">
       <template v-if="item.children">
-        <a-sub-menu :key="item.path">
+        <a-sub-menu :key="`${basePath}/${item.path}`">
           <template v-if="item.meta.icon" #icon>
             <svg-icon :name="item.meta.icon"></svg-icon>
           </template>
@@ -14,7 +14,7 @@
 
       <template v-else>
         <router-link :to="`${basePath}/${item.path}`">
-          <a-menu-item class="route-header" :key="item.path">
+          <a-menu-item class="route-header" :key="`${basePath}/${item.path}`">
             <template v-if="item.meta" #icon>
               <svg-icon :name="item.meta.icon"></svg-icon>
             </template>
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { resolve } from 'path-browserify'
+import { resolve } from 'path'
 import BarItem from './BarItem.vue'
 
 const props = defineProps({
