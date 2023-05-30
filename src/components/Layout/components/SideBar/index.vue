@@ -26,7 +26,6 @@ import { useRouter } from 'vue-router'
 
 const routeHeader = router.options.routes[0]
 const routeList = router.options.routes.slice(1)
-console.log(useRouter().currentRoute.value)
 </script>
 
 <style lang="scss" scoped>

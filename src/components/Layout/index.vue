@@ -19,6 +19,7 @@ import MainContainer from './components/MainContainer/index.vue'
   width: 250px;
   background: #fff;
   box-shadow: 1px 0px 10px 1px #c1c1c1;
+  border-right: 1px solid #dcdcdc;
 }
 
 .nav-bar {
@@ -27,7 +28,8 @@ import MainContainer from './components/MainContainer/index.vue'
   left: 250px;
   width: calc(100% - 250px);
   height: 60px;
-  background: #c1c1c1;
+  background: #fff;
+  border-bottom: 1px solid #dcdcdc;
 }
 
 .main-container {
@@ -38,6 +40,6 @@ import MainContainer from './components/MainContainer/index.vue'
   height: calc(100% - 60px);
   width: calc(100% - 250px);
   overflow-y: scroll;
-  background: rgb(216, 216, 216);
+  background: #fff;
 }
 </style>

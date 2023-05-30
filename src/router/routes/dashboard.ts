@@ -7,7 +7,7 @@ export const routes = [
     redirect: '/dashboard',
     component: Layout,
     isDashboard: true,
-    meta: { title: '首页', icon: 'person' },
+    meta: { title: '迷你遛统一门户', icon: 'dashboard' },
     children: [
       {
         path: 'dashboard',
