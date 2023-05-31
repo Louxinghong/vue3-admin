@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div :class="['layout', isCollapsed ? 'layout-collapsed' : '']">
     <side-bar></side-bar>
 
     <nav-bar></nav-bar>
@@ -12,6 +12,11 @@
 import SideBar from './components/SideBar/index.vue'
 import NavBar from './components/NavBar/index.vue'
 import MainContainer from './components/MainContainer/index.vue'
+import useStatusStore from '@/store/modules/status'
+import { storeToRefs } from 'pinia'
+
+const statusStore = useStatusStore()
+const { isCollapsed } = storeToRefs(statusStore)
 </script>
 
 <style lang="scss" scoped>
@@ -41,5 +46,21 @@ import MainContainer from './components/MainContainer/index.vue'
   width: calc(100% - 250px);
   overflow-y: scroll;
   background: #fff;
+}
+
+.layout-collapsed {
+  .side-bar {
+    width: 55px;
+  }
+
+  .nav-bar,
+  .main-container {
+    left: 55px;
+    width: calc(100% - 55px);
+  }
+
+  :deep(.route-header) {
+    margin-left: -10px;
+  }
 }
 </style>

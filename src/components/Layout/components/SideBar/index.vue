@@ -1,6 +1,7 @@
 <template>
   <div class="side-bar">
     <a-menu
+      :collapsed="isCollapsed"
       :auto-scroll-into-view="true"
       :auto-open-selected="true"
       :default-selected-keys="[useRouter().currentRoute.value.path]"
@@ -8,7 +9,7 @@
       <router-link to="/">
         <a-menu-item class="route-header" :key="routeHeader.path">
           <template #icon>
-            <svg-icon :name="routeHeader.meta.icon" />
+            <svg-icon size="40px" :name="routeHeader.meta.icon" />
           </template>
           {{ routeHeader.meta.title }}
         </a-menu-item>
@@ -23,9 +24,13 @@
 import router from '@/router/index'
 import BarItem from './components/BarItem.vue'
 import { useRouter } from 'vue-router'
+import useStatusStore from '@/store/modules/status'
+import { storeToRefs } from 'pinia'
 
 const routeHeader = router.options.routes[0]
 const routeList = router.options.routes.slice(1)
+const statusStore = useStatusStore()
+const { isCollapsed } = storeToRefs(statusStore)
 </script>
 
 <style lang="scss" scoped>
@@ -57,13 +62,10 @@ const routeList = router.options.routes.slice(1)
     font-weight: bolder;
     color: #1890ff;
 
-    span {
-      display: inline-block;
-    }
-
     &.arco-menu-selected {
       font-weight: bolder;
       background: #fff;
+      color: #1890ff;
     }
 
     &:hover {

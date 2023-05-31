@@ -2,7 +2,7 @@
   <div class="bar-item">
     <template v-for="item in props.routes">
       <template v-if="item.children">
-        <a-sub-menu :key="`${basePath}/${item.path}`">
+        <a-sub-menu :key="resolvePath(item.path)">
           <template v-if="item.meta.icon" #icon>
             <svg-icon :name="item.meta.icon"></svg-icon>
           </template>
@@ -13,9 +13,9 @@
       </template>
 
       <template v-else>
-        <router-link :to="`${basePath}/${item.path}`">
-          <a-menu-item class="route-header" :key="`${basePath}/${item.path}`">
-            <template v-if="item.meta" #icon>
+        <router-link :to="resolvePath(item.path)">
+          <a-menu-item class="route-header" :key="resolvePath(item.path)">
+            <template v-if="item.meta.icon" #icon>
               <svg-icon :name="item.meta.icon"></svg-icon>
             </template>
             {{ item.meta.title }}
@@ -46,4 +46,10 @@ const resolvePath = (path: string) => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bar-item {
+  a {
+    text-decoration: none;
+  }
+}
+</style>
