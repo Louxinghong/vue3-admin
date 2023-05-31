@@ -44,19 +44,19 @@ const { isCollapsed } = storeToRefs(statusStore)
   padding: 10px;
   height: calc(100% - 60px);
   width: calc(100% - 250px);
-  overflow-y: scroll;
+  overflow-y: auto;
   background: #fff;
 }
 
 .layout-collapsed {
   .side-bar {
-    width: 55px;
+    width: 50px;
   }
 
   .nav-bar,
   .main-container {
-    left: 55px;
-    width: calc(100% - 55px);
+    left: 50px;
+    width: calc(100% - 50px);
   }
 
   :deep(.route-header) {
