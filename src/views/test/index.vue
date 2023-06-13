@@ -2,60 +2,9 @@
   <div class="test">
     <TestSon :count="count" @addCount="onAddCount"></TestSon>
 
-    <span>state.count: {{ state.count }}</span>
-    <span>computedEven2: {{ computedEven2 }}</span>
+    <p>state.count: {{ state.count }}</p>
+    <p>computedEven2: {{ computedEven2 }}</p>
     <a-button type="primary" @click="onChangeComputed">改变计算属性</a-button>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
-    <p>12321312321</p>
   </div>
 </template>
 
@@ -72,13 +21,30 @@ const state = reactive({
     gender: '男'
   }
 })
+let nameOptions = ref({
+  name: 'xiaohong'
+})
+console.log(nameOptions.value.name)
+
+interface enumOptions {
+  label: string
+  value: number
+}
+const options = ref<Array<enumOptions>>([
+  {
+    label: '123',
+    value: 1
+  }
+])
+
+console.log(options.value[0].label)
 
 // 只读计算属性
 const computedEven1 = computed(() => state.count % 2)
 // 可读可写
 const computedEven2 = computed<number>({
   get: () => {
-    return state.count % 2
+    return state.count + 1
   },
   set: (value) => {
     state.count = value
