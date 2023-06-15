@@ -1,16 +1,13 @@
 <template>
   <div class="coordinate-point">
     <div class="actions">
-      <a-popover title="经纬度" trigger="click" position="bl">
-        <a-button class="btn-single" type="primary" size="small">单点展示</a-button>
-        <template #content>
-          <a-input class="input-lng" placeholder="请输入经度" allow-clear v-model="coordinateLng" />
-          <a-input class="input-lat" placeholder="请输入纬度" allow-clear v-model="coordinateLat" />
-          <a-button type="primary" @click="onDrawPoint">确定</a-button>
-        </template>
-      </a-popover>
+      <a-space>
+        <!-- 绘制单点 -->
+        <SinglePoint @drawPoint="onDrawPoint" />
 
-      <a-button class="btn-batch" type="primary" size="small">批量展示</a-button>
+        <!-- 绘制多点 -->
+        <BatchPoint @drawPoint="onDrawPoint" />
+      </a-space>
     </div>
 
     <div id="map-container" class="map-container"></div>
@@ -20,32 +17,44 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { getAMapData } from '@/api/index'
+import SinglePoint from './components/SinglePoint.vue'
+import BatchPoint from './components/BatchPoint.vue'
 
-let map = ref('')
-let AMap = ref({})
+let map = ref<Object>({})
+let AMap = ref<Object>({})
 onMounted(async () => {
   AMap = await getAMapData()
-  map = new AMap.Map('map-container', {
+  map.value = new AMap.Map('map-container', {
     zoom: 11, //级别
     center: [116.397428, 39.90923], //中心点坐标
     viewMode: '2D' //使用3D视图
   })
 })
 
-let coordinateLng = ref<string>('')
-let coordinateLat = ref<string>('')
-const onDrawPoint = () => {
-  const marker = new AMap.Marker({
-    icon: new AMap.Icon({
-      size: new AMap.Size(35, 35),
-      image: new URL('@/assets/images/point-marker.png', import.meta.url).href,
-      imageSize: new AMap.Size(35, 35),
-      imageOffset: new AMap.Pixel(0, 0)
-    }),
-    position: [coordinateLng.value, coordinateLat.value],
-    offset: new AMap.Pixel(-18, -18)
+let markers = ref<Array<{}>>([])
+interface lngLatData {
+  id: number
+  lng: string
+  lat: string
+}
+const onDrawPoint = (params: Array<lngLatData>) => {
+  markers.value && map.value.remove(markers.value)
+
+  params.forEach((item) => {
+    let marker = ref({})
+    marker.value = new AMap.Marker({
+      map: map.value,
+      icon: new AMap.Icon({
+        size: new AMap.Size(35, 35),
+        image: new URL('@/assets/images/point-marker.png', import.meta.url).href,
+        imageSize: new AMap.Size(35, 35),
+        imageOffset: new AMap.Pixel(0, 0)
+      }),
+      position: [item.lng, item.lat],
+      offset: new AMap.Pixel(-18, -18)
+    })
+    markers.value.push(marker.value)
   })
-  marker.setMap(map)
 }
 </script>
 
@@ -57,16 +66,6 @@ const onDrawPoint = () => {
 
 .actions {
   margin-bottom: 10px;
-
-  .btn-batch {
-    margin-left: 10px;
-  }
-}
-
-.input-lng,
-.input-lat {
-  margin-right: 10px;
-  width: 120px;
 }
 
 .map-container {

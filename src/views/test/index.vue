@@ -53,4 +53,10 @@ const computedEven2 = computed<number>({
 
 const onAddCount = () => count.value++
 const onChangeComputed = () => (computedEven2.value += 2)
+
+const swap = <T, U>(tuple: [T, U]): [U, T] => {
+  return [tuple[1], tuple[0]]
+}
+const result = swap<string, number>(['xiaohong', 111])
+console.log(result)
 </script>
