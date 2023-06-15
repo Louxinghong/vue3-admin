@@ -30,15 +30,20 @@
 import { resolve } from 'path'
 import BarItem from './BarItem.vue'
 
-const props = defineProps({
-  routes: {
-    type: Array,
-    default: () => []
-  },
-  basePath: {
-    type: String,
-    default: ''
-  }
+interface Props {
+  routes: Array<{
+    path: string
+    children?: []
+    meta: {
+      icon: string
+      title: string
+    }
+  }>
+  basePath: string
+}
+const props = withDefaults(defineProps<Props>(), {
+  routes: () => [],
+  basePath: ''
 })
 
 const resolvePath = (path: string) => {
