@@ -5,7 +5,7 @@
       <template #content>
         <a-tabs default-active-key="1">
           <a-tab-pane key="1" title="手动输入">
-            <div v-for="item in manualInputList" :key="item.id" class="manual-list">
+            <div v-for="(item, index) in manualInputList" :key="index" class="manual-list">
               <a-space>
                 <a-input
                   class="input-lng"
@@ -20,13 +20,19 @@
                   v-model="item.lat"
                 />
                 <svg-icon
-                  v-if="item.id === manualInputList.length"
+                  v-if="index === manualInputList.length - 1"
                   class="coordinate-add"
                   name="add"
                   size="20px"
                   @click="onAddManualInputList"
                 />
-                <svg-icon v-if="item.id > 1" class="coordinate-delete" name="delete" size="20px" />
+                <svg-icon
+                  v-if="manualInputList.length > 1"
+                  class="coordinate-delete"
+                  name="delete"
+                  size="20px"
+                  @click="onDeleteManualInputList(index)"
+                />
               </a-space>
             </div>
 
@@ -43,23 +49,23 @@
 import { ref } from 'vue'
 
 interface lngLatData {
-  id: number
   lng: string
   lat: string
 }
 let manualInputList = ref<Array<lngLatData>>([
   {
-    id: 1,
     lng: '',
     lat: ''
   }
 ])
 const onAddManualInputList = () => {
   manualInputList.value.push({
-    id: manualInputList.value.length + 1,
     lng: '',
     lat: ''
   })
+}
+const onDeleteManualInputList = (index: number) => {
+  manualInputList.value.splice(index, 1)
 }
 
 const emit = defineEmits(['drawPoint'])

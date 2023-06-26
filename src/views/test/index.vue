@@ -59,4 +59,12 @@ const swap = <T, U>(tuple: [T, U]): [U, T] => {
 }
 const result = swap<string, number>(['xiaohong', 111])
 console.log(result)
+
+interface Iprint<T, U> {
+  (param1: T, param2: U): U
+}
+const myPrint: Iprint<number, string> = (param1, param2) => {
+  return `${param1} + 1 + ${param2}`
+}
+console.log(myPrint(123, '小红'))
 </script>
