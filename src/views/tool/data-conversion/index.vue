@@ -53,7 +53,7 @@ const onConvertJsonToExcel = () => {
 
 .json-excel {
   width: 100%;
-  height: 40vh;
+  height: 75vh;
 }
 
 .btn-convert-json {
