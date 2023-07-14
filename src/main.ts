@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import components from './components'
+import JsonViewer from 'vue-json-viewer'
 import ArcoVue from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
 import './style/common.scss'
@@ -13,4 +14,4 @@ const app = createApp(App)
 Object.keys(components).forEach((key) => {
   app.component(key, components[key])
 })
-app.use(router).use(store).use(ArcoVue).mount('#app')
+app.use(router).use(store).use(ArcoVue).use(JsonViewer).mount('#app')
