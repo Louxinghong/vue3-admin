@@ -25,6 +25,7 @@ const { isCollapsed } = storeToRefs(statusStore)
   background: #fff;
   box-shadow: 1px 0px 10px 1px #c1c1c1;
   border-right: 1px solid #dcdcdc;
+  transition: width 0.5s;
 }
 
 .nav-bar {
@@ -35,6 +36,7 @@ const { isCollapsed } = storeToRefs(statusStore)
   height: 60px;
   background: #fff;
   border-bottom: 1px solid #dcdcdc;
+  transition: width 0.5s, left 0.5s;
 }
 
 .main-container {
@@ -46,6 +48,7 @@ const { isCollapsed } = storeToRefs(statusStore)
   width: calc(100% - 250px);
   overflow-y: auto;
   background: #fff;
+  transition: width 0.5s, left 0.5s;
 }
 
 .layout-collapsed {
