@@ -17,8 +17,8 @@
 import * as XLSX from 'xlsx'
 
 interface Props {
-  btnName: string
-  showFileList: boolean
+  btnName?: string
+  showFileList?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   btnName: '上传文件',

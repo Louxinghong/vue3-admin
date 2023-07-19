@@ -1,14 +1,12 @@
 <template>
   <div class="coordinate-point">
-    <div class="actions">
-      <a-space>
-        <!-- 绘制单点 -->
-        <SinglePoint @drawPoint="onDrawPoint" />
+    <a-space class="actions">
+      <!-- 绘制单点 -->
+      <SinglePoint @drawPoint="onDrawPoint" />
 
-        <!-- 绘制多点 -->
-        <BatchPoint @drawPoint="onDrawPoint" />
-      </a-space>
-    </div>
+      <!-- 绘制多点 -->
+      <BatchPoint @drawPoint="onDrawPoint" />
+    </a-space>
 
     <div id="map-container" class="map-container"></div>
   </div>

@@ -39,7 +39,7 @@ interface Props {
       title: string
     }
   }>
-  basePath: string
+  basePath?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   routes: () => [],
