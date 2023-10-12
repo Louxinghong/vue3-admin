@@ -41,7 +41,10 @@
               <a-button type="primary" @click="onSubmit">确定</a-button>
             </a-space>
           </a-tab-pane>
-          <a-tab-pane key="2" title="数据导入"> Content of Tab Panel 2 </a-tab-pane>
+          <a-tab-pane key="2" title="数据导入">
+            <file-upload @success="onUploadFile" />
+            <a-button type="text" @click="onDownloadBatchPointDemo">(模板下载)</a-button>
+          </a-tab-pane>
         </a-tabs>
       </template>
     </a-popover>
@@ -78,6 +81,26 @@ const onSubmit = () => {
 const onClear = () => {
   manualInputList.value = [{ lng: '', lat: '' }]
   emit('drawPoint', manualInputList.value)
+}
+
+interface batchLngLatData {
+  address: string
+  coordinate: string
+}
+const onDownloadBatchPointDemo = () => {
+  location.href = '/batchPoint.xlsx'
+}
+const onUploadFile = (list: Array<batchLngLatData>) => {
+  emit(
+    'drawPoint',
+    list.map((item) => {
+      return {
+        address: item.address,
+        lng: item.coordinate.split(',')[0],
+        lat: item.coordinate.split(',')[1]
+      }
+    })
+  )
 }
 </script>
 

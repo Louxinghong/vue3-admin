@@ -113,8 +113,8 @@ import { Message } from '@arco-design/web-vue'
 
 // EXCEL转JSON
 let jsonResult = ref<Array<[]>>([])
-const onUploadFile = (value: []) => {
-  jsonResult.value = value
+const onUploadFile = (list: []) => {
+  jsonResult.value = list
 }
 
 // JSON转EXCEL

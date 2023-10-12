@@ -1,5 +1,6 @@
 <template>
   <div class="test">
+    <a-button @click="onAddCount">给我+1</a-button>
     <TestSon :count="count" @addCount="onAddCount"></TestSon>
 
     <p>state.count: {{ state.count }}</p>
@@ -9,11 +10,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRef, reactive, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import TestSon from './components/TestSon.vue'
+import { getAIData } from '@/api/index'
 
 const count = ref<number>(12)
-const state = reactive({
+const state = ref({
   count: 1,
   userInfo: {
     name: 'xiaohong',
@@ -40,19 +42,32 @@ const options = ref<Array<enumOptions>>([
 console.log(options.value[0].label)
 
 // 只读计算属性
-const computedEven1 = computed(() => state.count % 2)
+const computedEven1 = computed(() => state.value.count % 2)
 // 可读可写
 const computedEven2 = computed<number>({
   get: () => {
-    return state.count + 1
+    return state.value.count + 1
   },
   set: (value) => {
-    state.count = value
+    state.value.count = value
   }
 })
+watch(
+  () => state.value.count,
+  (newVal, oldVal) => {
+    console.log(newVal, oldVal)
+  },
+  {
+    immediate: true
+  }
+)
 
 const onAddCount = () => count.value++
-const onChangeComputed = () => (computedEven2.value += 2)
+const onChangeComputed = async () => {
+  computedEven2.value += 2
+  // const result = await getAIData()
+  // console.log(result)
+}
 
 const swap = <T, U>(tuple: [T, U]): [U, T] => {
   return [tuple[1], tuple[0]]

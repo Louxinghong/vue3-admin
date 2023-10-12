@@ -6,6 +6,8 @@
 </template>
 
 <script lang="ts" setup>
+import { watch } from 'vue'
+
 // 父传子
 interface Props {
   count: number
@@ -13,6 +15,12 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   count: 0
 })
+watch(
+  () => props.count,
+  (newVal, oldVal) => {
+    console.log('count', newVal, oldVal)
+  }
+)
 
 // 子调父方法
 const emit = defineEmits(['addCount'])

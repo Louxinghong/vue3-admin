@@ -1,6 +1,7 @@
 <template>
   <div class="nav-bar">
     <svg-icon
+      class="is-collapsed"
       size="35px"
       :name="`scale-${isCollapsed ? 'out' : 'in'}`"
       @click="onChangeSideBarStatus"
@@ -32,6 +33,10 @@ const currentRouteTitle = computed(() => {
   display: flex;
   align-items: center;
   padding: 5px 15px;
+
+  .is-collapsed {
+    cursor: pointer;
+  }
 
   .menu-title {
     margin-left: 10px;

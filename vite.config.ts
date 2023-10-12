@@ -35,7 +35,20 @@ export default () => {
     server: {
       port: 4000,
       open: true,
-      cors: true
+      cors: true,
+      proxy: {
+        '/ai-api': {
+          target: 'http://api.qingyunke.com/api.php',
+          changeOrigin: true,
+          ws: true
+          // rewrite: (path: string) => path.replace(/^\/api/, '')
+        },
+        '/bilibili-api': {
+          target: 'https://api.bilibili.com',
+          changeOrigin: true,
+          ws: true
+        }
+      }
     }
   }
 }

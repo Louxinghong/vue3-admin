@@ -1,10 +1,7 @@
 import axios from 'axios'
 import { Message } from '@arco-design/web-vue'
 
-const baseURL = 'https://api.bilibili.com'
-
 const service = axios.create({
-  baseURL,
   timeout: 30000
 })
 

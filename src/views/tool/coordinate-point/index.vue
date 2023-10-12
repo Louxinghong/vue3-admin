@@ -18,8 +18,8 @@ import { getAMapData } from '@/api/index'
 import SinglePoint from './components/SinglePoint.vue'
 import BatchPoint from './components/BatchPoint.vue'
 
-let map = ref<Object>({})
-let AMap = ref<Object>({})
+let map = ref<any>({})
+let AMap = ref<any>({})
 onMounted(async () => {
   AMap = await getAMapData()
   map.value = new AMap.Map('map-container', {
@@ -31,9 +31,10 @@ onMounted(async () => {
 
 let markers = ref<Array<{}>>([])
 interface lngLatData {
-  id: number
+  id?: number
   lng: string
   lat: string
+  address?: string
 }
 const onDrawPoint = (params: Array<lngLatData>) => {
   markers.value && map.value.remove(markers.value)
@@ -53,6 +54,7 @@ const onDrawPoint = (params: Array<lngLatData>) => {
     })
     markers.value.push(marker.value)
   })
+  map.value.setFitView()
 }
 </script>
 
