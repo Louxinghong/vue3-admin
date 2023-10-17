@@ -1,7 +1,13 @@
 <template>
   <div class="batch-point">
     <a-popover title="" trigger="click" position="bl" style="width: 360px">
-      <a-button class="btn-batch" type="primary" size="small">批量展示</a-button>
+      <a-button class="btn-batch" type="primary">
+        <template #icon>
+          <svg-icon name="upload" size="15px" />
+        </template>
+        点位信息
+      </a-button>
+
       <template #content>
         <a-tabs default-active-key="1">
           <a-tab-pane key="1" title="手动输入">

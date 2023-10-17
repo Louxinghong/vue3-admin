@@ -1,11 +1,8 @@
 <template>
   <div class="coordinate-point">
     <a-space class="actions">
-      <!-- 绘制单点 -->
-      <SinglePoint @drawPoint="onDrawPoint" />
-
       <!-- 绘制多点 -->
-      <BatchPoint @drawPoint="onDrawPoint" />
+      <point-info @drawPoint="onDrawPoint"></point-info>
     </a-space>
 
     <div id="map-container" class="map-container"></div>
@@ -13,12 +10,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+// 在Vue3中使用时,需要引入Vue3中的shallowRef方法(使用shallowRef进行非深度监听, 因为在Vue3中所使用的Proxy拦截操作会改变JSAPI原生对象,所以此处需要区别Vue2使用方式对地图对象进行非深度监听, 否则会出现问题,建议JSAPI相关对象采用非响应式的普通对象来存储)
+import { ref, shallowRef, onMounted } from 'vue'
 import { getAMapData } from '@/api/index'
-import SinglePoint from './components/SinglePoint.vue'
-import BatchPoint from './components/BatchPoint.vue'
+import PointInfo from './components/PointInfo.vue'
 
-let map = ref<any>({})
+let map = shallowRef<any>({})
 let AMap = ref<any>({})
 onMounted(async () => {
   AMap = await getAMapData()
@@ -37,23 +34,25 @@ interface lngLatData {
   address?: string
 }
 const onDrawPoint = (params: Array<lngLatData>) => {
-  markers.value && map.value.remove(markers.value)
+  map.value.clearMap()
+  markers.value = []
 
   params.forEach((item) => {
     let marker = ref({})
     marker.value = new AMap.Marker({
       map: map.value,
       icon: new AMap.Icon({
-        size: new AMap.Size(35, 35),
+        size: new AMap.Size(36, 36),
         image: new URL('@/assets/images/point-marker.png', import.meta.url).href,
-        imageSize: new AMap.Size(35, 35),
+        imageSize: new AMap.Size(36, 36),
         imageOffset: new AMap.Pixel(0, 0)
       }),
       position: [item.lng, item.lat],
-      offset: new AMap.Pixel(-18, -18)
+      offset: new AMap.Pixel(-18, -36)
     })
     markers.value.push(marker.value)
   })
+
   map.value.setFitView()
 }
 </script>

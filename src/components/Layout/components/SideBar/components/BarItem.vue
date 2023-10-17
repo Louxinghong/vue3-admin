@@ -1,7 +1,7 @@
 <template>
   <div class="bar-item">
     <template v-for="item in props.routes">
-      <template v-if="item.children">
+      <template v-if="item.children && !item.hidden">
         <a-sub-menu :key="resolvePath(item.path)">
           <template v-if="item.meta.icon" #icon>
             <svg-icon :name="item.meta.icon"></svg-icon>
@@ -14,7 +14,7 @@
 
       <template v-else>
         <router-link :to="resolvePath(item.path)">
-          <a-menu-item class="route-header" :key="resolvePath(item.path)">
+          <a-menu-item v-if="!item.hidden" class="route-header" :key="resolvePath(item.path)">
             <template v-if="item.meta.icon" #icon>
               <svg-icon :name="item.meta.icon"></svg-icon>
             </template>
@@ -38,6 +38,7 @@ interface Props {
       icon: string
       title: string
     }
+    hidden?: boolean
   }>
   basePath?: string
 }

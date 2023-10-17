@@ -1,7 +1,7 @@
 <template>
   <div class="test">
     <a-button @click="onAddCount">给我+1</a-button>
-    <TestSon :count="count" @addCount="onAddCount"></TestSon>
+    <test-son :count="count" @addCount="onAddCount"></test-son>
 
     <p>state.count: {{ state.count }}</p>
     <p>computedEven2: {{ computedEven2 }}</p>
