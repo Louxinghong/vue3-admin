@@ -31,7 +31,7 @@ export default () => {
         '@': resolve(__dirname, 'src')
       }
     },
-    base: './',
+    base: '/vue3-admin/',
     server: {
       port: 4000,
       open: true,
