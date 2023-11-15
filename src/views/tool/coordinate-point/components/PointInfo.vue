@@ -94,7 +94,7 @@ interface batchLngLatData {
   coordinate: string
 }
 const onDownloadBatchPointDemo = () => {
-  location.href = '/batchPoint.xlsx'
+  location.href = '/file/batchPoint.xlsx'
 }
 const onUploadFile = (list: Array<batchLngLatData>) => {
   emit(
