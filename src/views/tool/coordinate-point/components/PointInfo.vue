@@ -94,7 +94,7 @@ interface batchLngLatData {
   coordinate: string
 }
 const onDownloadBatchPointDemo = () => {
-  location.href = '/file/batchPoint.xlsx'
+  location.href = '/vue3-admin/file/batchPoint.xlsx'
 }
 const onUploadFile = (list: Array<batchLngLatData>) => {
   emit(
