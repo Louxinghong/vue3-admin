@@ -23,6 +23,6 @@ watch(
 )
 
 // 子调父方法
-const emit = defineEmits(['addCount'])
+const emit = defineEmits(['addCount', 'update:title'])
 const onAddCount = () => emit('addCount')
 </script>

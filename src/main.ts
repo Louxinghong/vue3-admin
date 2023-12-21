@@ -9,6 +9,15 @@ import '@arco-design/web-vue/dist/arco.css'
 import './style/common.scss'
 import 'virtual:svg-icons-register'
 
+router.beforeEach((to, from, next) => {
+  console.log(to.matched)
+  if (!to.matched || to.matched.length === 0) {
+    next('/404')
+  } else {
+    next()
+  }
+})
+
 const app = createApp(App)
 // 注册全局组件
 Object.keys(components).forEach((key) => {

@@ -6,7 +6,6 @@ export const routes = [
     name: 'Tool',
     redirect: '/tool/coordinate-point',
     component: Layout,
-    isDashboard: true,
     meta: { title: '工具类', icon: 'tool' },
     children: [
       {

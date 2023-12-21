@@ -20,15 +20,16 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import router from '@/router/index'
 import BarItem from './components/BarItem.vue'
 import { useRouter } from 'vue-router'
 import useStatusStore from '@/store/modules/status'
 import { storeToRefs } from 'pinia'
 
-const routeHeader = router.options.routes[0]
-const routeList = router.options.routes.slice(1)
+const routeHeader = router.options.routes.filter((item) => item.isDashboard)[0]
+const routeList = router.options.routes.filter((item) => !item.hidden && !item.isDashboard)
+console.log(routeList)
 const statusStore = useStatusStore()
 const { isCollapsed } = storeToRefs(statusStore)
 </script>
