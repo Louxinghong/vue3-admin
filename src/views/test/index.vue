@@ -1,24 +1,37 @@
 <template>
   <div class="test">
-    <a-button @click="onAddCount">给我+1</a-button>
-    <test-son :count="count" @addCount="onAddCount"></test-son>
+    <div class="test-one">
+      <a-button @click="onAddCount">给我+1</a-button>
+      <test-son :count="count" @addCount="onAddCount"></test-son>
 
-    <p>state.count: {{ state.count }}</p>
-    <p>computedEven2: {{ computedEven2 }}</p>
-    <a-button type="primary" @click="onChangeComputed">改变计算属性</a-button>
+      <p>state.count: {{ state.count }}</p>
+      <p>computedEven2: {{ computedEven2 }}</p>
+      <a-button type="primary" @click="onChangeComputed">改变计算属性</a-button>
+    </div>
 
-    <a-button @click="onChangeX">改变X</a-button>
-    <a-button @click="onChangeY">改变Y</a-button>
+    <div class="test-two">
+      <a-button @click="onChangeX">改变X</a-button>
+      <a-button @click="onChangeY">改变Y</a-button>
+    </div>
 
-    <a-button :loading="loading" @click="onChangeOptions">获取Options</a-button>
-    <a-select :options="demoOptions"></a-select>
+    <div class="test-three">
+      <a-button :loading="loading" @click="onChangeOptions">获取Options</a-button>
+      <a-select :options="demoOptions"></a-select>
+    </div>
+
+    <div class="test-four">
+      <a-input-number v-model="calNum1"></a-input-number>
+      <a-input-number v-model="calNum2"></a-input-number>
+      <p>{{ calculateResult }}</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts" name="TestDemo">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 import TestSon from './components/TestSon.vue'
 import { getAIData } from '@/api/index'
+import useCalculate from '@/hook/useCalculate'
 
 const count = ref<number>(12)
 const state = ref({
@@ -158,4 +171,10 @@ const onChangeOptions = async () => {
   demoOptions.value = result
   console.log(result)
 }
+
+let calNum1 = ref<number>(1)
+let calNum2 = ref<number>(7)
+let calType = ref<string>('add')
+const { calculateFnOptions, calculateResult } = useCalculate(calNum1, calNum2, calType.value)
+calculateFnOptions(calNum1.value, calNum2.value)
 </script>

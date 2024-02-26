@@ -6,7 +6,7 @@ let allRoutes: any[] = Object.keys(requireRoutes).reduce((total, path: string) =
   return total
 }, [])
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'development') {
   let findTestIndex = allRoutes.findIndex((item) => item.name === 'Test')
   findTestIndex && allRoutes.splice(findTestIndex, 1)
 }
