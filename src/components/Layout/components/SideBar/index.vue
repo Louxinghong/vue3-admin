@@ -29,7 +29,6 @@ import { storeToRefs } from 'pinia'
 
 const routeHeader = router.options.routes.filter((item) => item.isDashboard)[0]
 const routeList = router.options.routes.filter((item) => !item.hidden && !item.isDashboard)
-console.log(routeList)
 const statusStore = useStatusStore()
 const { isCollapsed } = storeToRefs(statusStore)
 </script>
@@ -61,17 +60,17 @@ const { isCollapsed } = storeToRefs(statusStore)
   .route-header {
     font-size: 20px;
     font-weight: bolder;
-    color: #1890ff;
+    color: #165dff;
 
     &.arco-menu-selected {
       font-weight: bolder;
       background: #fff;
-      color: #1890ff;
+      color: #165dff;
     }
 
     &:hover {
       background: #fff;
-      color: #1890ff;
+      color: #165dff;
     }
   }
 }

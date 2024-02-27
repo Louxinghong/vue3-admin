@@ -162,3 +162,25 @@ export const calculatePolygonGravityCenter = (coordinates: Array<coordinate>) =>
     lat: gravityLat
   }
 }
+
+/**
+ * 高德地址
+ */
+export const customGetAddress = (
+  AMap: any,
+  lng: string | number,
+  lat: string | number
+): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    AMap.plugin('AMap.Geocoder', () => {
+      new AMap.Geocoder().getAddress([lng, lat], (status: string, result: any) => {
+        if (status === 'complete' && result.info === 'OK') {
+          const address = result.regeocode.formattedAddress
+          resolve(address)
+        } else {
+          reject(null)
+        }
+      })
+    })
+  })
+}
