@@ -14,7 +14,12 @@
 
       <template v-else>
         <router-link :to="resolvePath(item.path)">
-          <a-menu-item v-if="!item.hidden" class="route-header" :key="resolvePath(item.path)">
+          <a-menu-item
+            v-if="!item.hidden"
+            class="route-header"
+            :key="resolvePath(item.path)"
+            @click="onAddToRouterTag(item, resolvePath(item.path))"
+          >
             <template v-if="item.meta.icon" #icon>
               <svg-icon :name="item.meta.icon"></svg-icon>
             </template>
@@ -27,29 +32,38 @@
 </template>
 
 <script lang="ts" setup>
-import { resolve } from 'path'
-import BarItem from './BarItem.vue'
+import { resolve } from "path";
+import useRouterTagStore from "@/store/modules/routerTag";
+import BarItem from "./BarItem.vue";
 
 interface Props {
   routes: Array<{
-    path: string
-    children?: []
+    path: string;
+    children?: [];
     meta: {
-      icon: string
-      title: string
-    }
-    hidden?: boolean
-  }>
-  basePath?: string
+      icon: string;
+      title: string;
+    };
+    hidden?: boolean;
+  }>;
+  basePath?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   routes: () => [],
-  basePath: ''
-})
+  basePath: ""
+});
 
 const resolvePath = (path: string) => {
-  return resolve(props.basePath, path)
-}
+  return resolve(props.basePath, path);
+};
+
+const routerTagStore = useRouterTagStore();
+const onAddToRouterTag = (data: any, path: string) => {
+  routerTagStore.addTag({
+    title: data.meta.title,
+    path
+  });
+};
 </script>
 
 <style lang="scss" scoped>

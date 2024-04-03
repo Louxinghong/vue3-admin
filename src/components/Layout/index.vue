@@ -9,14 +9,14 @@
 </template>
 
 <script lang="ts" setup>
-import SideBar from './components/SideBar/index.vue'
-import NavBar from './components/NavBar/index.vue'
-import MainContainer from './components/MainContainer/index.vue'
-import useStatusStore from '@/store/modules/status'
-import { storeToRefs } from 'pinia'
+import SideBar from "./components/SideBar/index.vue";
+import NavBar from "./components/NavBar/index.vue";
+import MainContainer from "./components/MainContainer/index.vue";
+import useStatusStore from "@/store/modules/status";
+import { storeToRefs } from "pinia";
 
-const statusStore = useStatusStore()
-const { isCollapsed } = storeToRefs(statusStore)
+const statusStore = useStatusStore();
+const { isCollapsed } = storeToRefs(statusStore);
 </script>
 
 <style lang="scss" scoped>
@@ -33,7 +33,7 @@ const { isCollapsed } = storeToRefs(statusStore)
   top: 0;
   left: 250px;
   width: calc(100% - 250px);
-  height: 60px;
+  height: 92px;
   background: #fff;
   border-bottom: 1px solid #dcdcdc;
   transition: width 0.5s, left 0.5s;
@@ -41,10 +41,10 @@ const { isCollapsed } = storeToRefs(statusStore)
 
 .main-container {
   position: absolute;
-  top: 60px;
+  top: 92px;
   left: 250px;
   padding: 10px;
-  height: calc(100% - 60px);
+  height: calc(100% - 92px);
   width: calc(100% - 250px);
   overflow-y: auto;
   background: #fff;

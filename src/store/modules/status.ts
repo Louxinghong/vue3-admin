@@ -1,21 +1,22 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
 const useStatusStore = defineStore(
-  'status',
+  "status",
   () => {
-    const isCollapsed = ref<boolean>(false)
+    const isCollapsed = ref<boolean>(false);
     const changeSideBarStatus = () => {
-      isCollapsed.value = !isCollapsed.value
-    }
+      isCollapsed.value = !isCollapsed.value;
+    };
 
     return {
       isCollapsed,
       changeSideBarStatus
-    }
+    };
   },
   {
-    persist: true
+    persist: true // 数据持久化, 防止浏览器刷新丢失数据
   }
-)
-export default useStatusStore
+);
+
+export default useStatusStore;
