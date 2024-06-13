@@ -17,8 +17,7 @@
     <svg-icon
       class="exchange"
       name="exchange"
-      :width="'40px'"
-      :height="'40px'"
+      :size="'40px'"
       @click="coordinateToAddress"
     ></svg-icon>
 
@@ -27,32 +26,32 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
-import { customGetAddress } from '@/utils/mapUtils'
-import { getAMapData } from '@/api/index'
+import { ref, onMounted } from "vue";
+import { customGetAddress } from "@/utils/mapUtils";
+import { getAMapData } from "@/api/index";
 
-let AMap = ref<any>({})
+let AMap = ref<any>({});
 onMounted(async () => {
-  AMap = await getAMapData()
-})
+  AMap = await getAMapData();
+});
 
-let coordinateList = ref<string>('')
-let addressList = ref<string>('')
+let coordinateList = ref<string>("");
+let addressList = ref<string>("");
 
 const coordinateToAddress = async () => {
-  addressList.value = ''
+  addressList.value = "";
 
   await Promise.all(
-    coordinateList.value.split('\n').map(async (item) => {
-      const result = await customGetAddress(AMap, item.split(',')[0], item.split(',')[1])
+    coordinateList.value.split("\n").map(async (item) => {
+      const result = await customGetAddress(AMap, item.split(",")[0], item.split(",")[1]);
       if (!addressList.value) {
-        addressList.value = result
+        addressList.value = result;
       } else {
-        addressList.value += `\n${result}`
+        addressList.value += `\n${result}`;
       }
     })
-  )
-}
+  );
+};
 </script>
 
 <style lang="scss" scoped>
