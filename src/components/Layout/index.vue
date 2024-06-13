@@ -35,7 +35,7 @@ const { isCollapsed } = storeToRefs(statusStore);
   width: calc(100% - 250px);
   height: 92px;
   background: #fff;
-  border-bottom: 1px solid #dcdcdc;
+  border-bottom: 1px solid #efefef;
   transition: width 0.5s, left 0.5s;
 }
 
