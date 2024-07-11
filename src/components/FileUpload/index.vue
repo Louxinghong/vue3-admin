@@ -14,35 +14,41 @@
 </template>
 
 <script lang="ts" setup>
-import * as XLSX from 'xlsx'
+import * as XLSX from "xlsx";
+import { ExcelFileResult } from "@/utils/interface";
 
 interface Props {
-  btnName?: string
-  showFileList?: boolean
+  btnName?: string;
+  showFileList?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  btnName: '上传文件',
+  btnName: "上传文件",
   showFileList: false
-})
+});
 
 const readFile = (file: any) => {
   return new Promise((resolve) => {
-    const fileReader = new FileReader()
-    fileReader.readAsBinaryString(file)
+    const fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
     fileReader.onload = (e) => {
       let workbook = XLSX.read(e.target?.result, {
-        type: 'binary'
-      })
-      let worksheet = workbook.Sheets[workbook.SheetNames[0]]
-      let result = XLSX.utils.sheet_to_json(worksheet)
-      resolve(result)
-    }
-  })
-}
-const emit = defineEmits(['success'])
+        type: "binary"
+      });
+      let result: Array<ExcelFileResult> = [];
+      workbook.SheetNames.map((item) => {
+        result.push({
+          sheetName: item,
+          sheetList: XLSX.utils.sheet_to_json(workbook.Sheets[item])
+        });
+      });
+      resolve(result);
+    };
+  });
+};
+const emit = defineEmits(["success"]);
 const onCustomRequest = (option: any): any => {
   readFile(option.fileItem.file).then((result) => {
-    emit('success', result)
-  })
-}
+    emit("success", result);
+  });
+};
 </script>

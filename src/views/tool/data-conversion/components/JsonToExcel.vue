@@ -1,5 +1,11 @@
 <template>
   <div class="json-to-excel">
+    <div class="type-select">
+      <a-radio-group v-model="fileNumType">
+        <a-radio value="single">单表</a-radio>
+        <a-radio value="batch">多表</a-radio>
+      </a-radio-group>
+    </div>
     <a-textarea class="json-excel" placeholder="请输入JSON内容" v-model="jsonToExcelData" />
     <a-button class="btn-convert-json" type="primary" @click="onConvertJsonToExcel">
       <template #icon>
@@ -11,19 +17,32 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import * as XLSX from 'xlsx'
+import { ref } from "vue";
+import * as XLSX from "xlsx";
+import { ExcelFileResult } from "@/utils/interface";
 
-let jsonToExcelData = ref<string>('')
+let fileNumType = ref<string>("single");
+let jsonToExcelData = ref<string>("");
 const onConvertJsonToExcel = () => {
-  const result = XLSX.utils.json_to_sheet(JSON.parse(jsonToExcelData.value))
-  const wb = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(wb, result, 'data')
-  XLSX.writeFile(wb, '测试表格.xlsx')
-}
+  const WB = XLSX.utils.book_new();
+  if (fileNumType.value === "single") {
+    let result = XLSX.utils.json_to_sheet(JSON.parse(jsonToExcelData.value));
+    XLSX.utils.book_append_sheet(WB, result, "data");
+  } else {
+    JSON.parse(jsonToExcelData.value).map((item: ExcelFileResult) => {
+      let result = XLSX.utils.json_to_sheet(item.sheetList);
+      XLSX.utils.book_append_sheet(WB, result, item.sheetName);
+    });
+  }
+  XLSX.writeFile(WB, "测试表格.xlsx");
+};
 </script>
 
 <style lang="scss" scoped>
+.type-select {
+  margin-bottom: 10px;
+}
+
 .json-excel {
   width: 100%;
   height: 75vh;
