@@ -40,7 +40,7 @@ const q = { class: "batch-point" },
           (e.value = [{ lng: "", lat: "" }]), o("drawPoint", e.value);
         },
         l = () => {
-          location.href = "/mgmt-tool/file/batchPoint.xlsx";
+          location.href = "/vue3-admin/file/batchPoint.xlsx";
         },
         D = (d) => {
           o(
@@ -240,7 +240,7 @@ const G = S(T, [["__scopeId", "data-v-a13c51a9"]]),
               map: o.value,
               icon: new e.Icon({
                 size: new e.Size(36, 36),
-                image: new URL("/mgmt-tool/assets/point-marker-2b2f6918.png", self.location).href,
+                image: new URL("/vue3-admin/assets/point-marker-2b2f6918.png", self.location).href,
                 imageSize: new e.Size(36, 36),
                 imageOffset: new e.Pixel(0, 0)
               }),

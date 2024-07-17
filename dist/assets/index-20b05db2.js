@@ -5279,7 +5279,7 @@ function nE(e, t) {
 const rE = ss(tE, [["render", nE]]),
   aE = "modulepreload",
   lE = function (e) {
-    return "/mgmt-tool/" + e;
+    return "/vue3-admin/" + e;
   },
   Sy = {},
   _u = function (t, n, r) {
