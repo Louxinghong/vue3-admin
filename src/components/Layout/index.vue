@@ -1,5 +1,17 @@
 <template>
-  <div :class="['layout', isCollapsed ? 'layout-collapsed' : '']">
+  <div
+    :class="[
+      'layout',
+      `layout${isCollapsed ? '' : '-no'}-collapsed`,
+      isMobile ? 'layout-mobile' : ''
+    ]"
+  >
+    <div
+      v-show="!isCollapsed && isMobile"
+      class="layout-no-collapsed-mask"
+      @click="onCollapsed"
+    ></div>
+
     <side-bar></side-bar>
 
     <nav-bar></nav-bar>
@@ -9,6 +21,7 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeMount } from "vue";
 import SideBar from "./components/SideBar/index.vue";
 import NavBar from "./components/NavBar/index.vue";
 import MainContainer from "./components/MainContainer/index.vue";
@@ -16,41 +29,24 @@ import useStatusStore from "@/store/modules/status";
 import { storeToRefs } from "pinia";
 
 const statusStore = useStatusStore();
-const { isCollapsed } = storeToRefs(statusStore);
+const { isCollapsed, isMobile } = storeToRefs(statusStore);
+const MOBILE_WIDTH = 992;
+
+// 添加自适应监听事件
+onBeforeMount(() => {
+  window.addEventListener("resize", onAdapation);
+});
+const onAdapation = () => {
+  let screenWidth = document.body.getBoundingClientRect().width;
+  statusStore.changeIsMoblieStatus(screenWidth <= MOBILE_WIDTH);
+  statusStore.changeSideBarStatus(screenWidth <= MOBILE_WIDTH);
+};
+const onCollapsed = () => {
+  statusStore.changeSideBarStatus(true);
+};
 </script>
 
 <style lang="scss" scoped>
-.side-bar {
-  width: 250px;
-  background: #fff;
-  box-shadow: 1px 0px 10px 1px #c1c1c1;
-  border-right: 1px solid #dcdcdc;
-  transition: width 0.5s;
-}
-
-.nav-bar {
-  position: absolute;
-  top: 0;
-  left: 250px;
-  width: calc(100% - 250px);
-  height: 92px;
-  background: #fff;
-  border-bottom: 1px solid #efefef;
-  transition: width 0.5s, left 0.5s;
-}
-
-.main-container {
-  position: absolute;
-  top: 92px;
-  left: 250px;
-  padding: 10px;
-  height: calc(100% - 92px);
-  width: calc(100% - 250px);
-  overflow-y: auto;
-  background: #fff;
-  transition: width 0.5s, left 0.5s;
-}
-
 .layout-collapsed {
   .side-bar {
     width: 50px;
@@ -64,6 +60,35 @@ const { isCollapsed } = storeToRefs(statusStore);
 
   :deep(.route-header) {
     margin-left: -10px;
+  }
+}
+
+.layout-mobile {
+  .nav-bar,
+  .main-container {
+    left: 0;
+    width: 100%;
+  }
+
+  &.layout-no-collapsed {
+    .side-bar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 9999;
+    }
+  }
+
+  .layout-no-collapsed-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: 0.6);
+    z-index: 999;
   }
 }
 </style>

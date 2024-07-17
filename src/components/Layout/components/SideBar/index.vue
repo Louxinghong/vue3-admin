@@ -21,19 +21,27 @@
 </template>
 
 <script setup lang="ts">
-import router from '@/router/index'
-import BarItem from './components/BarItem.vue'
-import { useRouter } from 'vue-router'
-import useStatusStore from '@/store/modules/status'
-import { storeToRefs } from 'pinia'
+import router from "@/router/index";
+import BarItem from "./components/BarItem.vue";
+import { useRouter } from "vue-router";
+import useStatusStore from "@/store/modules/status";
+import { storeToRefs } from "pinia";
 
-const routeHeader = router.options.routes.filter((item) => item.isDashboard)[0]
-const routeList = router.options.routes.filter((item) => !item.hidden && !item.isDashboard)
-const statusStore = useStatusStore()
-const { isCollapsed } = storeToRefs(statusStore)
+const routeHeader = router.options.routes.filter((item) => item.isDashboard)[0];
+const routeList = router.options.routes.filter((item) => !item.hidden && !item.isDashboard);
+const statusStore = useStatusStore();
+const { isCollapsed } = storeToRefs(statusStore);
 </script>
 
 <style lang="scss" scoped>
+.side-bar {
+  width: 250px;
+  background: #fff;
+  box-shadow: 1px 0px 10px 1px #c1c1c1;
+  border-right: 1px solid #dcdcdc;
+  transition: width 0.5s;
+}
+
 .arco-menu {
   height: 100vh;
   background: #fff;

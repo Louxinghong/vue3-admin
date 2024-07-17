@@ -5,13 +5,20 @@ const useStatusStore = defineStore(
   "status",
   () => {
     const isCollapsed = ref<boolean>(false);
-    const changeSideBarStatus = () => {
-      isCollapsed.value = !isCollapsed.value;
+    const changeSideBarStatus = (status: boolean) => {
+      isCollapsed.value = status;
+    };
+
+    const isMobile = ref<boolean>(false);
+    const changeIsMoblieStatus = (status: boolean) => {
+      isMobile.value = status;
     };
 
     return {
       isCollapsed,
-      changeSideBarStatus
+      changeSideBarStatus,
+      isMobile,
+      changeIsMoblieStatus
     };
   },
   {

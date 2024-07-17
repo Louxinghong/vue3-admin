@@ -10,9 +10,8 @@
         ></svg-icon>
         <span class="menu-title">{{ currentRouteData.title }}</span>
       </div>
-      <div class="current-user">
-        <svg-icon name="dashboard" size="40px" />
-      </div>
+
+      <img class="user-img" :src="USER_IMG" alt="logo" />
     </div>
 
     <router-tag-view :current-route-data="currentRouteData"></router-tag-view>
@@ -27,11 +26,12 @@ import { useRouter } from "vue-router";
 import { RouterTagViewConfig } from "@/utils/interface";
 import RouterTagView from "./components/RouterTagView.vue";
 
+const USER_IMG = new URL("@/assets/images/user.jpg", import.meta.url).href;
 // 侧栏状态管理
 let statusStore = useStatusStore();
 let { isCollapsed } = storeToRefs(statusStore);
 const onChangeSideBarStatus = () => {
-  statusStore.changeSideBarStatus();
+  statusStore.changeSideBarStatus(!isCollapsed.value);
 };
 
 let router = useRouter();
@@ -46,11 +46,22 @@ let currentRouteData = computed<RouterTagViewConfig>(() => {
 </script>
 
 <style lang="scss" scoped>
+.nav-bar {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: calc(100% - 250px);
+  height: 92px;
+  background: #fff;
+  border-bottom: 1px solid #efefef;
+  transition: width 0.5s, left 0.5s;
+}
+
 .menu-user {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 15px;
+  padding: 5px;
   width: 100%;
 
   .current-menu {
@@ -65,81 +76,11 @@ let currentRouteData = computed<RouterTagViewConfig>(() => {
       margin-left: 10px;
     }
   }
-}
 
-.history-menu-list {
-  display: flex;
-  align-items: center;
-  padding: 1px;
-  width: 100%;
-  height: 32px;
-  background: #f3f3f3;
-
-  .arrow {
-    padding: 0;
-    width: 20px;
-    height: 30px;
-    border-radius: 2px;
-    background: #fff;
-    color: #a7a7a7;
-
-    &:hover {
-      background: #dddddd;
-    }
-  }
-
-  .list {
-    position: relative;
-    margin: 0 2px;
-    padding: 1px 0;
-    width: calc(100% - 40px);
-    height: 30px;
-    font-size: 12px;
-    overflow: hidden;
-
-    .scroll-content {
-      position: absolute;
-      white-space: nowrap;
-      overflow: visible;
-      transition: left 0.3s ease, right 0.3s ease;
-
-      &::-webkit-scrollbar {
-        height: 0; /*高宽分别对应横竖滚动条的尺寸...*/
-      }
-    }
-
-    .list-item {
-      display: inline-block;
-      padding: 0 5px;
-      height: 28px;
-      line-height: 28px;
-      background: #fff;
-      color: #797979;
-      border-radius: 2px;
-      cursor: pointer;
-      text-decoration: none;
-
-      &:not(:last-child) {
-        margin-right: 5px;
-      }
-
-      .tag {
-        display: inline-block;
-        margin-right: 5px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #e5e5e5;
-
-        &-actived {
-          background: #165dff;
-        }
-      }
-
-      .arco-icon-close {
-        margin-left: 5px;
-      }
-    }
+  .user-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
   }
 }
 </style>

@@ -9,6 +9,18 @@
 </template>
 
 <style lang="scss" scoped>
+.main-container {
+  position: absolute;
+  top: 92px;
+  left: 250px;
+  padding: 10px;
+  height: calc(100% - 92px);
+  width: calc(100% - 250px);
+  overflow-y: auto;
+  background: #fff;
+  transition: width 0.5s, left 0.5s;
+}
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
