@@ -31,7 +31,7 @@ export default () => {
         "@": resolve(__dirname, "src")
       }
     },
-    base: "/vue3-admin/",
+    base: "/mgmt-tool/",
     build: {
       outDir: "docs"
     },
