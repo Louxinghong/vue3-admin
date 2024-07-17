@@ -58,56 +58,56 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 interface lngLatData {
-  lng: string
-  lat: string
+  lng: string;
+  lat: string;
 }
 let manualInputList = ref<Array<lngLatData>>([
   {
-    lng: '',
-    lat: ''
+    lng: "",
+    lat: ""
   }
-])
+]);
 const onAddManualInputList = () => {
   manualInputList.value.push({
-    lng: '',
-    lat: ''
-  })
-}
+    lng: "",
+    lat: ""
+  });
+};
 const onDeleteManualInputList = (index: number) => {
-  manualInputList.value.splice(index, 1)
-}
+  manualInputList.value.splice(index, 1);
+};
 
-const emit = defineEmits(['drawPoint'])
+const emit = defineEmits(["drawPoint"]);
 const onSubmit = () => {
-  emit('drawPoint', manualInputList.value)
-}
+  emit("drawPoint", manualInputList.value);
+};
 const onClear = () => {
-  manualInputList.value = [{ lng: '', lat: '' }]
-  emit('drawPoint', manualInputList.value)
-}
+  manualInputList.value = [{ lng: "", lat: "" }];
+  emit("drawPoint", manualInputList.value);
+};
 
 interface batchLngLatData {
-  address: string
-  coordinate: string
+  address: string;
+  coordinate: string;
 }
 const onDownloadBatchPointDemo = () => {
-  location.href = '/vue3-admin/file/batchPoint.xlsx'
-}
+  location.href = "/mgmt-tool/file/batchPoint.xlsx";
+};
 const onUploadFile = (list: Array<batchLngLatData>) => {
   emit(
-    'drawPoint',
+    "drawPoint",
     list.map((item) => {
       return {
         address: item.address,
-        lng: item.coordinate.split(',')[0],
-        lat: item.coordinate.split(',')[1]
-      }
+        lng: item.coordinate.split(",")[0],
+        lat: item.coordinate.split(",")[1]
+      };
     })
-  )
-}
+  );
+};
 </script>
 
 <style lang="scss" scoped>
