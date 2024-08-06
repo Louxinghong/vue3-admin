@@ -8,8 +8,7 @@ const service = axios.create({
 service.interceptors.request.use(
   (config: any) => {
     if (config.url.indexOf("https://api.chatanywhere.tech") > -1) {
-      config.headers["Authorization"] =
-        "Bearer sk-tnef6WGvU7fAOs3jhMFwR4LgBL9sC6IhYToW7BpFnmp5L3hZ";
+      config.headers["Authorization"] = "";
       config.redirect = "follow";
     }
 

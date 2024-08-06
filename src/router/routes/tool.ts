@@ -19,13 +19,13 @@ export const routes = [
         name: "DataConversion",
         component: () => import("@/views/tool/data-conversion/index.vue"),
         meta: { title: "数据转换", icon: "" }
-      },
-      {
-        path: "chat-ai",
-        name: "ChatAI",
-        component: () => import("@/views/tool/chat-ai/index.vue"),
-        meta: { title: "Chat-GPT", icon: "" }
       }
+      // {
+      //   path: "chat-ai",
+      //   name: "ChatAI",
+      //   component: () => import("@/views/tool/chat-ai/index.vue"),
+      //   meta: { title: "Chat-GPT", icon: "" }
+      // }
     ]
   }
 ];
