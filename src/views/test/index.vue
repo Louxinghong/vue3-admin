@@ -129,18 +129,13 @@ const onChangeY = () => {
   y.value = 3;
 };
 
-interface OptionsConfig<T, U> {
-  label: T;
-  value: U;
-}
-
-const aOptions: OptionsConfig<string, number>[] = [
+let aOptions: CommonConfig.OptionsConfig<string, number>[] = [
   {
-    label: "标题1",
+    label: "1",
     value: 1
   }
 ];
-const bOptions: OptionsConfig<string, string>[] = [
+let bOptions: CommonConfig.OptionsConfig<string, string>[] = [
   {
     label: "标题1",
     value: "1"
