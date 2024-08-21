@@ -6,8 +6,7 @@ export const routes = [
     name: "Dashboard",
     redirect: "/dashboard",
     component: Layout,
-    isDashboard: true,
-    meta: { title: "首页", icon: "dashboard" },
+    meta: { title: "首页", icon: "dashboard", isDashboard: true },
     children: [
       {
         path: "dashboard",

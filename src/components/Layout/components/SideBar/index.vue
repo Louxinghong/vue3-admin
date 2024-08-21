@@ -9,9 +9,9 @@
       <router-link to="/">
         <a-menu-item class="route-header" :key="routeHeader.path">
           <template #icon>
-            <svg-icon size="40px" :name="routeHeader.meta.icon" />
+            <svg-icon size="40px" :name="routeHeader.meta?.icon" />
           </template>
-          {{ routeHeader.meta.title }}
+          {{ routeHeader.meta?.title }}
         </a-menu-item>
       </router-link>
 
@@ -27,8 +27,10 @@ import { useRouter } from "vue-router";
 import useStatusStore from "@/store/modules/status";
 import { storeToRefs } from "pinia";
 
-const routeHeader = router.options.routes.filter((item) => item.isDashboard)[0];
-const routeList = router.options.routes.filter((item) => !item.hidden && !item.isDashboard);
+const routeHeader = router.options.routes.filter((item) => item.meta?.isDashboard)[0];
+const routeList = router.options.routes.filter(
+  (item) => !item.meta?.hidden && !item.meta?.isDashboard
+);
 const statusStore = useStatusStore();
 const { isCollapsed } = storeToRefs(statusStore);
 </script>

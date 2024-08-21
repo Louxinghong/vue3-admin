@@ -1,12 +1,12 @@
 <template>
   <div class="bar-item">
     <template v-for="item in props.routes">
-      <template v-if="item.children && !item.hidden">
+      <template v-if="item.children && !item.meta?.hidden">
         <a-sub-menu :key="resolvePath(item.path)">
-          <template v-if="item.meta.icon" #icon>
-            <svg-icon :name="item.meta.icon"></svg-icon>
+          <template v-if="item.meta?.icon" #icon>
+            <svg-icon :name="item.meta?.icon"></svg-icon>
           </template>
-          <template #title>{{ item.meta.title }}</template>
+          <template #title>{{ item.meta?.title }}</template>
 
           <bar-item :routes="item.children" :base-path="resolvePath(item.path)"></bar-item>
         </a-sub-menu>
@@ -15,15 +15,15 @@
       <template v-else>
         <router-link :to="resolvePath(item.path)">
           <a-menu-item
-            v-if="!item.hidden"
+            v-if="!item.meta?.hidden"
             class="route-header"
             :key="resolvePath(item.path)"
             @click="onAddToRouterTag(item, resolvePath(item.path))"
           >
-            <template v-if="item.meta.icon" #icon>
-              <svg-icon :name="item.meta.icon"></svg-icon>
+            <template v-if="item.meta?.icon" #icon>
+              <svg-icon :name="item.meta?.icon"></svg-icon>
             </template>
-            {{ item.meta.title }}
+            {{ item.meta?.title }}
           </a-menu-item>
         </router-link>
       </template>
@@ -33,19 +33,12 @@
 
 <script lang="ts" setup>
 import { resolve } from "path";
+import { RouteRecordRaw } from "vue-router";
 import useRouterTagStore from "@/store/modules/routerTag";
 import BarItem from "./BarItem.vue";
 
 interface Props {
-  routes: Array<{
-    path: string;
-    children?: [];
-    meta: {
-      icon: string;
-      title: string;
-    };
-    hidden?: boolean;
-  }>;
+  routes: RouteRecordRaw[];
   basePath?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
