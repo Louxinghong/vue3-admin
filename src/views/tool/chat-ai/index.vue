@@ -36,11 +36,11 @@ import { getGptMessage } from "@/api/index";
 import { ChatData } from "@/utils/interface";
 import { cloneDeep } from "lodash";
 
-let loading = ref<boolean>(false);
-let sendMessage = ref<string>(""); // 每次发送的信息
-let messageList = ref<Array<ChatData>>([]); // 发送信息合集
+const loading = ref<boolean>(false);
+const sendMessage = ref<string>(""); // 每次发送的信息
+const messageList = ref<Array<ChatData>>([]); // 发送信息合集
 const USER_IMG = new URL("@/assets/images/user.jpg", import.meta.url).href;
-let chatListRef = ref(); // 聊天列表dom
+const chatListRef = ref(); // 聊天列表dom
 
 const onSendMessage = async () => {
   if (loading.value) {
@@ -49,7 +49,7 @@ const onSendMessage = async () => {
 
   loading.value = true;
 
-  let sendData = cloneDeep(sendMessage.value);
+  const sendData = cloneDeep(sendMessage.value);
   sendMessage.value = "";
   messageList.value.push({
     id: messageList.value.length + 1,
@@ -68,9 +68,9 @@ const onSendMessage = async () => {
     chatListRef.value.scrollTop = chatListRef.value.scrollHeight - chatListRef.value.clientHeight;
   }, 0);
 
-  let changeAIMessageData = messageList.value[messageList.value.length - 1];
+  const changeAIMessageData = messageList.value[messageList.value.length - 1];
   try {
-    let result = await getGptMessage({ content: sendData });
+    const result = await getGptMessage({ content: sendData });
     changeAIMessageData.content = result.choices
       ? result.choices[0].message.content
       : "出错啦~再试一下哦";

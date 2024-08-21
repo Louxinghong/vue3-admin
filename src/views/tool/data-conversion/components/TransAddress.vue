@@ -35,8 +35,8 @@ onMounted(async () => {
   AMap = await getAMapData();
 });
 
-let coordinateList = ref<string>("");
-let addressList = ref<string>("");
+const coordinateList = ref<string>("");
+const addressList = ref<string>("");
 
 const coordinateToAddress = async () => {
   addressList.value = "";

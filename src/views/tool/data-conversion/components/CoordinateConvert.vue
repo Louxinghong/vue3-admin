@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 import {
   wgs84ToGcj02,
   wgs84ToBd09,
@@ -83,137 +83,137 @@ import {
   gcj02ToWgs84,
   bd09ToWgs84,
   bd09ToGcj02
-} from '@/utils/mapUtils'
-import { Message } from '@arco-design/web-vue'
+} from "@/utils/mapUtils";
+import { Message } from "@arco-design/web-vue";
 
-let coordinateSingleOrBatch = ref<string>('single') // 坐标转换单量或批量
-let coordinateType = ref<string>('') // 初始坐标类型
-let coordinateOptions = ref([
+const coordinateSingleOrBatch = ref<string>("single"); // 坐标转换单量或批量
+const coordinateType = ref<string>(""); // 初始坐标类型
+const coordinateOptions = ref([
   {
-    label: 'WGS84(国际通用)',
-    value: 'wgs84'
+    label: "WGS84(国际通用)",
+    value: "wgs84"
   },
   {
-    label: 'BD09(百度地图)',
-    value: 'bd09'
+    label: "BD09(百度地图)",
+    value: "bd09"
   },
   {
-    label: 'GCJ02(高德、QQ地图)',
-    value: 'gcj02'
+    label: "GCJ02(高德、QQ地图)",
+    value: "gcj02"
   }
   // {
   //   label: 'CGCS2000(2000国家大地坐标)',
   //   value: 'cgcs2000'
   // }
-])
+]);
 // 单量经纬度
-let initialSingleCoordinate = ref<string>('')
+const initialSingleCoordinate = ref<string>("");
 interface coordinateList {
-  [key: string]: string
+  [key: string]: string;
 }
-let singleCoordinateResult = ref<coordinateList>({
-  wgs84: '',
-  gcj02: '',
-  bd09: '',
-  address: ''
+const singleCoordinateResult = ref<coordinateList>({
+  wgs84: "",
+  gcj02: "",
+  bd09: "",
+  address: ""
   // cgcs2000: ''
-})
+});
 // 批量经纬度
-let initialBatchCoordinate = ref<string>('')
-let batchCoordinateResultType = ref<string>('') // 批量结果坐标类型
-let showBatchResultCoordinate = ref<boolean>(false) // 批量结果弹窗状态
-let batchCoordinateResult = ref<string>('')
+const initialBatchCoordinate = ref<string>("");
+const batchCoordinateResultType = ref<string>(""); // 批量结果坐标类型
+const showBatchResultCoordinate = ref<boolean>(false); // 批量结果弹窗状态
+const batchCoordinateResult = ref<string>("");
 // 经纬度转换
 const onConvertCoordinate = async () => {
   if (!coordinateType.value) {
-    Message.warning('请选择初始坐标系类型')
-    return
+    Message.warning("请选择初始坐标系类型");
+    return;
   }
 
-  if (coordinateSingleOrBatch.value === 'single') {
+  if (coordinateSingleOrBatch.value === "single") {
     if (!initialSingleCoordinate.value) {
-      Message.warning('请输入初始坐标')
-      return
+      Message.warning("请输入初始坐标");
+      return;
     }
 
-    const transformCoordinate = initialSingleCoordinate.value.split(',')
+    const transformCoordinate = initialSingleCoordinate.value.split(",");
     // 先给选中类型的自身赋值
-    singleCoordinateResult.value[coordinateType.value] = initialSingleCoordinate.value
+    singleCoordinateResult.value[coordinateType.value] = initialSingleCoordinate.value;
     // 经纬度转换
     switch (coordinateType.value) {
-      case 'wgs84':
+      case "wgs84":
         singleCoordinateResult.value.gcj02 = wgs84ToGcj02(
           Number(transformCoordinate[0]),
           Number(transformCoordinate[1])
-        ).join(',')
+        ).join(",");
         singleCoordinateResult.value.bd09 = wgs84ToBd09(
           Number(transformCoordinate[0]),
           Number(transformCoordinate[1])
-        ).join(',')
-        break
-      case 'gcj02':
+        ).join(",");
+        break;
+      case "gcj02":
         singleCoordinateResult.value.wgs84 = gcj02ToWgs84(
           Number(transformCoordinate[0]),
           Number(transformCoordinate[1])
-        ).join(',')
+        ).join(",");
         singleCoordinateResult.value.bd09 = gcj02ToBd09(
           Number(transformCoordinate[0]),
           Number(transformCoordinate[1])
-        ).join(',')
-        break
-      case 'bd09':
+        ).join(",");
+        break;
+      case "bd09":
         singleCoordinateResult.value.wgs84 = bd09ToWgs84(
           Number(transformCoordinate[0]),
           Number(transformCoordinate[1])
-        ).join(',')
+        ).join(",");
         singleCoordinateResult.value.gcj02 = bd09ToGcj02(
           Number(transformCoordinate[0]),
           Number(transformCoordinate[1])
-        ).join(',')
-        break
+        ).join(",");
+        break;
       default:
-        break
+        break;
     }
   } else {
     if (!initialBatchCoordinate.value || !batchCoordinateResultType.value) {
-      Message.warning(!initialBatchCoordinate.value ? '请输入初始坐标' : '请选择目标坐标系类型')
-      return
+      Message.warning(!initialBatchCoordinate.value ? "请输入初始坐标" : "请选择目标坐标系类型");
+      return;
     }
     if (coordinateType.value === batchCoordinateResultType.value) {
-      Message.warning('经纬度初始类型与转换类型一致')
-      return
+      Message.warning("经纬度初始类型与转换类型一致");
+      return;
     }
 
-    showBatchResultCoordinate.value = true
-    let result: string[] = []
+    showBatchResultCoordinate.value = true;
+    let result: string[] = [];
     switch (batchCoordinateResultType.value) {
-      case 'wgs84':
+      case "wgs84":
         result = initialBatchCoordinate.value
-          .split('\n')
+          .split("\n")
           .map((item) =>
-            wgs84ToBd09(Number(item.split(',')[0]), Number(item.split(',')[1])).join(',')
-          )
-        break
-      case 'gcj02':
+            wgs84ToBd09(Number(item.split(",")[0]), Number(item.split(",")[1])).join(",")
+          );
+        break;
+      case "gcj02":
         result = initialBatchCoordinate.value
-          .split('\n')
+          .split("\n")
           .map((item) =>
-            gcj02ToBd09(Number(item.split(',')[0]), Number(item.split(',')[1])).join(',')
-          )
-        break
-      case 'bd09':
+            gcj02ToBd09(Number(item.split(",")[0]), Number(item.split(",")[1])).join(",")
+          );
+        break;
+      case "bd09":
         result = initialBatchCoordinate.value
-          .split('\n')
+          .split("\n")
           .map((item) =>
-            bd09ToGcj02(Number(item.split(',')[0]), Number(item.split(',')[1])).join(',')
-          )
-        break
+            bd09ToGcj02(Number(item.split(",")[0]), Number(item.split(",")[1])).join(",")
+          );
+        break;
       default:
-        break
+        break;
     }
-    batchCoordinateResult.value = result.join('\n')
+    batchCoordinateResult.value = result.join("\n");
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -45,7 +45,7 @@ const state = ref({
     gender: "男"
   }
 });
-let nameOptions = ref({
+const nameOptions = ref({
   name: "xiaohong"
 });
 console.log(nameOptions.value.name);
@@ -105,8 +105,8 @@ const myPrint: Iprint<number, string> = (param1, param2) => {
 };
 console.log(myPrint(123, "小红"));
 
-let x = ref<number>(0);
-let y = ref<number>(1);
+const x = ref<number>(0);
+const y = ref<number>(1);
 // 单个
 watch(x, (newX) => {
   console.log(`x is ${newX}`);
@@ -129,13 +129,13 @@ const onChangeY = () => {
   y.value = 3;
 };
 
-let aOptions: CommonConfig.OptionsConfig<string, number>[] = [
+const aOptions: CommonConfig.OptionsConfig<string, number>[] = [
   {
     label: "1",
     value: 1
   }
 ];
-let bOptions: CommonConfig.OptionsConfig<string, string>[] = [
+const bOptions: CommonConfig.OptionsConfig<string, string>[] = [
   {
     label: "标题1",
     value: "1"
@@ -143,7 +143,7 @@ let bOptions: CommonConfig.OptionsConfig<string, string>[] = [
 ];
 console.log(aOptions, bOptions);
 
-let loading = ref<boolean>(false);
+const loading = ref<boolean>(false);
 const getRemoteData = () => {
   return new Promise<any[]>((resolve) => {
     setTimeout(() => {
@@ -160,7 +160,7 @@ const getRemoteData = () => {
     }, 3000);
   });
 };
-let demoOptions = ref<any[]>([]);
+const demoOptions = ref<any[]>([]);
 const onChangeOptions = async () => {
   console.log(1);
   loading.value = true;
@@ -170,9 +170,9 @@ const onChangeOptions = async () => {
   console.log(result);
 };
 
-let calNum1 = ref<number>(1);
-let calNum2 = ref<number>(7);
-let calType = ref<string>("add");
+const calNum1 = ref<number>(1);
+const calNum2 = ref<number>(7);
+const calType = ref<string>("add");
 const { calculateFnOptions, calculateResult } = useCalculate(calNum1, calNum2, calType.value);
 calculateFnOptions(calNum1.value, calNum2.value);
 </script>

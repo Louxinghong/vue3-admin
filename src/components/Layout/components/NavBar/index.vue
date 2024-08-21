@@ -28,16 +28,16 @@ import RouterTagView from "./components/RouterTagView.vue";
 
 const USER_IMG = new URL("@/assets/images/user.jpg", import.meta.url).href;
 // 侧栏状态管理
-let statusStore = useStatusStore();
-let { isCollapsed } = storeToRefs(statusStore);
+const statusStore = useStatusStore();
+const { isCollapsed } = storeToRefs(statusStore);
 const onChangeSideBarStatus = () => {
   statusStore.changeSideBarStatus(!isCollapsed.value);
 };
 
-let router = useRouter();
-let currentRouteData = computed<RouterTagViewConfig>(() => {
-  let currentRoute = router.currentRoute.value;
-  let currentData = {
+const router = useRouter();
+const currentRouteData = computed<RouterTagViewConfig>(() => {
+  const currentRoute = router.currentRoute.value;
+  const currentData = {
     title: currentRoute.meta.title,
     path: currentRoute.path
   };

@@ -64,7 +64,7 @@ interface lngLatData {
   lng: string;
   lat: string;
 }
-let manualInputList = ref<Array<lngLatData>>([
+const manualInputList = ref<Array<lngLatData>>([
   {
     lng: "",
     lat: ""

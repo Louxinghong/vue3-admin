@@ -31,10 +31,10 @@ const readFile = (file: any) => {
     const fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
     fileReader.onload = (e) => {
-      let workbook = XLSX.read(e.target?.result, {
+      const workbook = XLSX.read(e.target?.result, {
         type: "binary"
       });
-      let result: Array<ExcelFileResult> = [];
+      const result: Array<ExcelFileResult> = [];
       workbook.SheetNames.map((item) => {
         result.push({
           sheetName: item,

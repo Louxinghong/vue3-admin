@@ -37,7 +37,7 @@ onBeforeMount(() => {
   window.addEventListener("resize", onAdapation);
 });
 const onAdapation = () => {
-  let screenWidth = document.body.getBoundingClientRect().width;
+  const screenWidth = document.body.getBoundingClientRect().width;
   statusStore.changeIsMoblieStatus(screenWidth <= MOBILE_WIDTH);
   statusStore.changeSideBarStatus(screenWidth <= MOBILE_WIDTH);
 };

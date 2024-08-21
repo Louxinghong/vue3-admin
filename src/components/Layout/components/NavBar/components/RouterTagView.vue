@@ -43,7 +43,7 @@ import { RouterTagViewConfig } from "@/utils/interface";
 interface Props {
   currentRouteData: RouterTagViewConfig;
 }
-let props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   currentRouteData: () => ({
     title: "",
     path: ""
@@ -51,26 +51,26 @@ let props = withDefaults(defineProps<Props>(), {
 });
 
 // 路由模块管理
-let routerTagStore = useRouterTagStore();
-let { tagList } = storeToRefs(routerTagStore);
-let router = useRouter();
+const routerTagStore = useRouterTagStore();
+const { tagList } = storeToRefs(routerTagStore);
+const router = useRouter();
 const onCloseRouterTag = (index: number) => {
   routerTagStore.removeTag(index);
   router.push(tagList.value[0].path);
 };
 
-let menuListRef = ref(); // 历史目录dom
-let menuScrollContentRef = ref(); // 历史目录内部可滚动区域dom
+const menuListRef = ref(); // 历史目录dom
+const menuScrollContentRef = ref(); // 历史目录内部可滚动区域dom
 // 历史目录dom宽度
-let menuListlWidth = computed(() => {
+const menuListlWidth = computed(() => {
   return menuListRef.value.offsetWidth;
 });
 // 历史目录内部可滚动区域dom宽度
-let menuScrollContentWidth = computed(() => {
+const menuScrollContentWidth = computed(() => {
   return menuScrollContentRef.value.offsetWidth;
 });
 // 可滚动区域的left值
-let menuScrollContentLeft = computed(() => {
+const menuScrollContentLeft = computed(() => {
   return menuScrollContentRef.value.offsetLeft;
 });
 // 左侧内容展示(向右滚动)
@@ -81,7 +81,7 @@ const onHistoryMenuLeft = () => {
 };
 // 右侧内容展示(向左滚动)
 const onHistoryMenuRight = () => {
-  let restMoveWidth =
+  const restMoveWidth =
     menuScrollContentWidth.value - menuListlWidth.value - Math.abs(menuScrollContentLeft.value);
   menuScrollContentRef.value.style.left = `${
     menuScrollContentLeft.value - (restMoveWidth < 0 ? 0 : restMoveWidth < 75 ? restMoveWidth : 75)
@@ -89,8 +89,8 @@ const onHistoryMenuRight = () => {
 };
 // 点击路由tagview
 const onChangeRouter = (index: number) => {
-  let listItemEl: any = document.getElementsByClassName("list-item")[index];
-  let moveWidth = listItemEl.offsetWidth + listItemEl.offsetLeft - menuListlWidth.value;
+  const listItemEl: any = document.getElementsByClassName("list-item")[index];
+  const moveWidth = listItemEl.offsetWidth + listItemEl.offsetLeft - menuListlWidth.value;
   moveWidth > 0 && (menuScrollContentRef.value.style.left = `-${moveWidth}px`);
 };
 </script>

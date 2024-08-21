@@ -15,7 +15,7 @@
 <script name="WaterfallFlow" lang="ts" setup>
 import { ref } from "vue";
 
-let flowItemRefs = ref<Array<any>>([]);
+const flowItemRefs = ref<Array<any>>([]);
 const setFlowItemRef = (el: any) => {
   flowItemRefs.value.push(el);
 };

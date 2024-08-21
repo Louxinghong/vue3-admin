@@ -7,12 +7,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-let jsonResult = ref<Array<[]>>([])
+const jsonResult = ref<Array<[]>>([]);
 const onUploadFile = (list: []) => {
-  jsonResult.value = list
-}
+  jsonResult.value = list;
+};
 </script>
 
 <style lang="scss" scoped>

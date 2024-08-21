@@ -5,7 +5,7 @@ import { RouterTagViewConfig } from "@/utils/interface";
 const useRouterTagStore = defineStore(
   "routerTag",
   () => {
-    let tagList = ref<Array<RouterTagViewConfig>>([
+    const tagList = ref<Array<RouterTagViewConfig>>([
       {
         title: "首页",
         path: "/dashboard"

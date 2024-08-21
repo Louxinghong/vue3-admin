@@ -21,16 +21,16 @@ import { ref } from "vue";
 import * as XLSX from "xlsx";
 import { ExcelFileResult } from "@/utils/interface";
 
-let fileNumType = ref<string>("single");
-let jsonToExcelData = ref<string>("");
+const fileNumType = ref<string>("single");
+const jsonToExcelData = ref<string>("");
 const onConvertJsonToExcel = () => {
   const WB = XLSX.utils.book_new();
   if (fileNumType.value === "single") {
-    let result = XLSX.utils.json_to_sheet(JSON.parse(jsonToExcelData.value));
+    const result = XLSX.utils.json_to_sheet(JSON.parse(jsonToExcelData.value));
     XLSX.utils.book_append_sheet(WB, result, "data");
   } else {
     JSON.parse(jsonToExcelData.value).map((item: ExcelFileResult) => {
-      let result = XLSX.utils.json_to_sheet(item.sheetList);
+      const result = XLSX.utils.json_to_sheet(item.sheetList);
       XLSX.utils.book_append_sheet(WB, result, item.sheetName);
     });
   }

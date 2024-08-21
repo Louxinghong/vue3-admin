@@ -21,9 +21,9 @@
 import { ref } from "vue";
 import dayjs from "dayjs";
 
-let convertType = ref<number>(0);
-let dateString = ref<string>("");
-let timestamp = ref<string>("");
+const convertType = ref<number>(0);
+const dateString = ref<string>("");
+const timestamp = ref<string>("");
 const onExchange = () => {
   convertType.value === 0 && (timestamp.value = String(dayjs(dateString.value).valueOf()));
   convertType.value === 1 &&
