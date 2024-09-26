@@ -25,6 +25,12 @@
       <p>{{ calculateResult }}</p>
     </div>
 
+    <div class="test-five">
+      <a-input-number v-model="calNum3"></a-input-number>
+      <a-input-number v-model="calNum4"></a-input-number>
+      <p>{{ calculateResult2 }}</p>
+    </div>
+
     <waterfall-flow></waterfall-flow>
   </div>
 </template>
@@ -33,8 +39,9 @@
 import { ref, computed, watch, watchEffect } from "vue";
 import TestSon from "./components/TestSon.vue";
 import { getAIData } from "@/api/index";
-import useCalculate from "@/hook/useCalculate";
+import useCalculate from "@/hooks/useCalculate";
 import WaterfallFlow from "./components/WaterfallFlow.vue";
+import useTable from "@/hooks/useTable";
 
 const count = ref<number>(12);
 const state = ref({
@@ -175,4 +182,25 @@ const calNum2 = ref<number>(7);
 const calType = ref<string>("add");
 const { calculateFnOptions, calculateResult } = useCalculate(calNum1, calNum2, calType.value);
 calculateFnOptions(calNum1.value, calNum2.value);
+
+const calNum3 = ref<number>(1);
+const calNum4 = ref<number>(7);
+const calTyp2 = ref<string>("add");
+const { calculateFnOptions: calculateFnOptions2, calculateResult: calculateResult2 } = useCalculate(
+  calNum3,
+  calNum4,
+  calTyp2.value
+);
+calculateFnOptions2(calNum1.value, calNum2.value);
+console.log(calculateResult2);
+
+// const {
+//   loading: tableLoading,
+//   tableData,
+//   pagination,
+//   getTableData
+// } = useTable<{msg: number}>(api, { msg: 123 });
+// getTableData();
+const resultTest = await getAIData("我想拉屎");
+console.log(resultTest);
 </script>

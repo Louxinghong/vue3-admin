@@ -21,7 +21,16 @@ export const getAMapData = async () => {
   });
 };
 
-export const getAIData = () => axios.get("/qingyunke-api?key=free&appid=0&msg=你好");
+export const getAIData = (message: string) =>
+  axios({
+    url: "/qingyunke-api",
+    method: "GET",
+    params: {
+      key: "free",
+      appid: 0,
+      msg: message
+    }
+  });
 
 export const getGptMessage = (params: { content: string }): Promise<ChatGptResult> =>
   axios("https://api.chatanywhere.tech/v1/chat/completions", {
