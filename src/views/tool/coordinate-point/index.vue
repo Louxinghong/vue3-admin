@@ -38,19 +38,21 @@ const onDrawPoint = (params: Array<lngLatData>) => {
   markers.value = [];
 
   params.forEach((item) => {
-    const marker = ref({});
-    marker.value = new AMap.Marker({
-      map: map.value,
-      icon: new AMap.Icon({
-        size: new AMap.Size(36, 36),
-        image: new URL("@/assets/images/point-marker.png", import.meta.url).href,
-        imageSize: new AMap.Size(36, 36),
-        imageOffset: new AMap.Pixel(0, 0)
-      }),
-      position: [item.lng, item.lat],
-      offset: new AMap.Pixel(-18, -36)
-    });
-    markers.value.push(marker.value);
+    if (item.lng && item.lat) {
+      const marker = ref({});
+      marker.value = new AMap.Marker({
+        map: map.value,
+        icon: new AMap.Icon({
+          size: new AMap.Size(36, 36),
+          image: new URL("@/assets/images/point-marker.png", import.meta.url).href,
+          imageSize: new AMap.Size(36, 36),
+          imageOffset: new AMap.Pixel(0, 0)
+        }),
+        position: [item.lng, item.lat],
+        offset: new AMap.Pixel(-18, -36)
+      });
+      markers.value.push(marker.value);
+    }
   });
 
   map.value.setFitView();

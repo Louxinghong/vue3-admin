@@ -10,4 +10,11 @@ declare namespace CommonConfig {
     msg: string;
     success: boolean;
   }
+
+  interface MapParams {
+    mapVersion: string;
+    mapPlugins: string[];
+    uiVersion: string;
+    uiPlugins: string[];
+  }
 }
