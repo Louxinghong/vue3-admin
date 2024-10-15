@@ -32,11 +32,13 @@
     </div>
 
     <waterfall-flow></waterfall-flow>
+
+    <!-- <a-button @click="onTestAI">测试普通AI</a-button> -->
   </div>
 </template>
 
-<script setup lang="ts" name="TestDemo">
-import { ref, computed, watch, watchEffect } from "vue";
+<script name="TestDemo" lang="ts" setup>
+import { ref, computed, watch } from "vue";
 import TestSon from "./components/TestSon.vue";
 import { getAIData } from "@/api/index";
 import useCalculate from "@/hooks/useCalculate";
@@ -114,6 +116,7 @@ console.log(myPrint(123, "小红"));
 
 const x = ref<number>(0);
 const y = ref<number>(1);
+console.log("x", x.value, "y", y.value);
 // 单个
 watch(x, (newX) => {
   console.log(`x is ${newX}`);
@@ -201,6 +204,9 @@ console.log(calculateResult2);
 //   getTableData
 // } = useTable<{msg: number}>(api, { msg: 123 });
 // getTableData();
-const resultTest = await getAIData("我想拉屎");
-console.log(resultTest);
+
+// const onTestAI = async () => {
+//   const resultTest = await getAIData("我想拉屎");
+//   console.log(resultTest);
+// };
 </script>
