@@ -16,13 +16,13 @@ import { getAMapData } from "@/api/index";
 import PointInfo from "./components/PointInfo.vue";
 
 const map = shallowRef<any>({});
-let AMap = ref<any>({});
+let AMap: any = {};
 onMounted(async () => {
   AMap = await getAMapData();
   map.value = new AMap.Map("map-container", {
-    zoom: 11, //级别
-    center: [116.397428, 39.90923], //中心点坐标
-    viewMode: "2D" //使用3D视图
+    zoom: 11, // 级别
+    center: [116.397428, 39.90923], // 中心点坐标
+    viewMode: "2D" // 使用3D视图
   });
 });
 

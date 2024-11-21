@@ -12,7 +12,7 @@ export default () => {
         // 指定symbolId格式
         symbolId: "icon-[dir]-[name]"
 
-        /**
+        /*
          * 自定义插入位置
          * @default: body-last
          */

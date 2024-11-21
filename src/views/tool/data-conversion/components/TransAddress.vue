@@ -30,7 +30,7 @@ import { ref, onMounted } from "vue";
 import { customGetAddress } from "@/utils/mapUtils";
 import { getAMapData } from "@/api/index";
 
-let AMap = ref<any>({});
+let AMap: any = {};
 onMounted(async () => {
   AMap = await getAMapData();
 });
