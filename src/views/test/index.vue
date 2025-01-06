@@ -34,11 +34,25 @@
     <waterfall-flow></waterfall-flow>
 
     <!-- <a-button @click="onTestAI">测试普通AI</a-button> -->
+
+    <!-- 将元素添加到body上 -->
+    <!-- <teleport to="body">
+      <span>12321</span>
+    </teleport> -->
+
+    <!-- 只更新一次 -->
+    <p v-once>count: {{ count }}</p>
+
+    <!-- customRef封装localStorageAPI -->
+    <a-button @click="onAddLocalStorageCount">localStorage-count + 1</a-button>
+
+    <!-- 可复用性 - 鼠标坐标 -->
+    <p>x: {{ point.x }}, y: {{ point.y }}</p>
   </div>
 </template>
 
 <script name="TestDemo" lang="ts" setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, customRef, onMounted, onUnmounted } from "vue";
 import TestSon from "./components/TestSon.vue";
 import { getAIData } from "@/api/index";
 import useCalculate from "@/hooks/useCalculate";
@@ -209,4 +223,57 @@ console.log(calculateResult2);
 //   const resultTest = await getAIData("我想拉屎");
 //   console.log(resultTest);
 // };
+const useLocakStorage = (key: string, initialValue: any) => {
+  const value = customRef((track, trigger) => {
+    return {
+      get() {
+        track();
+        return localStorage.getItem(key) ?? initialValue;
+      },
+      set(newValue: any) {
+        localStorage.setItem(key, newValue);
+        trigger();
+      }
+    };
+  });
+
+  return value;
+};
+const localStorageCount = useLocakStorage("localStorageCount", 0);
+const onAddLocalStorageCount = () => {
+  localStorageCount.value++;
+};
+
+// 可复用性 - 鼠标坐标
+const useEventListener = (target: any, event: string, callback: Function) => {
+  onMounted(() => {
+    target.addEventListener(event, callback);
+  });
+
+  onUnmounted(() => {
+    target.removeEventListener(event, callback);
+  });
+};
+
+const useMouse = () => {
+  const point = ref({
+    x: 0,
+    y: 0
+  });
+  useEventListener(window, "mousemove", (e: any) => {
+    point.value.x = e.clientX;
+    point.value.y = e.clientY;
+  });
+  return point;
+};
+const point = useMouse();
 </script>
+
+<style lang="scss" scoped>
+// 在局部文件了里全局生效
+// :global(body) {
+//   width: 100vw;
+//   height: 100vh;
+//   background-color: burlywood;
+// }
+</style>
