@@ -5,8 +5,16 @@
         <component :is="Component" />
       </transition>
     </router-view>
+
+    <a-watermark class="water-mark" :content="['admin', dayjs().format('YYYY-MM-DD')]">
+      <div style="width: 100%; height: 300px"></div>
+    </a-watermark>
   </div>
 </template>
+
+<script name="MainContainer" lang="ts" setup>
+import dayjs from "dayjs";
+</script>
 
 <style lang="scss" scoped>
 .main-container {
@@ -24,6 +32,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    z-index: 999;
   }
 }
 
@@ -40,5 +49,12 @@
 .fade-enter-active,
 .fade-leave-active {
   transition: 0.5s ease;
+}
+
+.water-mark {
+  position: absolute !important;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
