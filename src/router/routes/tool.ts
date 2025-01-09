@@ -19,6 +19,12 @@ export const routes = [
         name: "DataConversion",
         component: () => import("@/views/tool/data-conversion/index.vue"),
         meta: { title: "数据转换", icon: "" }
+      },
+      {
+        path: "draw-area",
+        name: "DrawArea",
+        component: () => import("@/views/tool/draw-area/index.vue"),
+        meta: { title: "绘制区域", icon: "" }
       }
       // {
       //   path: "chat-ai",

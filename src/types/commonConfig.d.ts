@@ -12,9 +12,9 @@ declare namespace CommonConfig {
   }
 
   interface MapParams {
-    mapVersion: string;
-    mapPlugins: string[];
-    uiVersion: string;
-    uiPlugins: string[];
+    mapVersion?: string;
+    mapPlugins?: string[];
+    uiVersion?: string;
+    uiPlugins?: string[];
   }
 }

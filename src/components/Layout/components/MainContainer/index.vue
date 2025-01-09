@@ -19,6 +19,12 @@
   overflow-y: auto;
   background: #fff;
   transition: width 0.5s, left 0.5s;
+
+  & > div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .fade-enter-from,
