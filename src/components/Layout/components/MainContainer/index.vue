@@ -1,13 +1,15 @@
 <template>
   <div class="main-container">
-    <router-view class="view" v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
-
-    <a-watermark class="water-mark" :content="['admin', dayjs().format('YYYY-MM-DD')]">
-      <div style="width: 100%; height: 300px"></div>
+    <a-watermark
+      class="water-mark"
+      :content="['admin', dayjs().format('YYYY-MM-DD')]"
+      :gap="[90, 50]"
+    >
+      <router-view class="view" v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </a-watermark>
   </div>
 </template>
@@ -28,11 +30,16 @@ import dayjs from "dayjs";
   background: #fff;
   transition: width 0.5s, left 0.5s;
 
-  & > div {
+  .arco-watermark {
     position: relative;
     width: 100%;
     height: 100%;
-    z-index: 999;
+
+    & > div {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -49,12 +56,5 @@ import dayjs from "dayjs";
 .fade-enter-active,
 .fade-leave-active {
   transition: 0.5s ease;
-}
-
-.water-mark {
-  position: absolute !important;
-  top: 0;
-  width: 100%;
-  height: 100%;
 }
 </style>
