@@ -6,7 +6,7 @@
       <template v-if="!drawAreaLoading">
         <a-button type="primary" @click="onDrawArea">绘制区域</a-button>
         <a-button type="primary" @click="onInputArea">输入区域</a-button>
-        <file-upload @success="onTransPPoint"></file-upload>
+        <!-- <file-upload @success="onTransPPoint"></file-upload> -->
       </template>
       <template v-else>
         <a-button @click="onExitEdit">退出编辑</a-button>
@@ -14,6 +14,7 @@
       </template>
     </div>
 
+    <!-- 区域配置弹窗 -->
     <dialog-info :visible="showAreaConfigDialog" :title="'区域经纬度'" @close="onCloseInputArea">
       <a-textarea
         class="area-input-list"
@@ -27,7 +28,7 @@
 <script name="DrawArea" lang="ts" setup>
 import { ref, onMounted } from "vue";
 import { getAMapData } from "@/api/index";
-import { Message } from "@arco-design/web-vue";
+import { Message, Notification } from "@arco-design/web-vue";
 
 const drawAreaLoading = ref<boolean>(false); // 编辑loading
 const showAreaConfigDialog = ref<boolean>(false); // 显示区域配置弹窗
@@ -73,7 +74,19 @@ const onDrawArea = () => {
 const onSaveArea = () => {
   if (polygonEditor) {
     polygonEditor.close();
-    inputAreaPolygon.setPath(polygonEditor.getPath());
+    let resultPath = polygonEditor.getTarget().getPath();
+    inputAreaPolygon.setPath(resultPath);
+    Notification.success({
+      id: "1",
+      title: "绘制结果",
+      content: `${JSON.stringify(
+        resultPath.map((item: any) => {
+          return { lng: item.lng, lat: item.lat };
+        })
+      )}`,
+      closable: true,
+      duration: 0
+    });
     map.remove(polygonEditor);
   }
   mouseTool && mouseTool.close();
@@ -95,9 +108,10 @@ const onCloseInputArea = (value: boolean) => {
       // 因为JSON数据放入输入框，故需两次JSON.parse
       inputAreaPolygon = new AMap.Polygon({
         map: map,
-        path: JSON.parse(JSON.parse(inputAreaInfo.value)).map(
-          (item: { lng: number; lat: number }) => [item.lng, item.lat]
-        ),
+        path: JSON.parse(inputAreaInfo.value).map((item: { lng: number; lat: number }) => [
+          item.lng,
+          item.lat
+        ]),
         strokeColor: "#FF7A00",
         strokeStyle: "dashed",
         fillColor: "#FF7A00",

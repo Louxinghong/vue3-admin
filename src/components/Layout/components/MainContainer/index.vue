@@ -34,6 +34,7 @@ import dayjs from "dayjs";
     position: relative;
     width: 100%;
     height: 100%;
+    overflow-y: auto !important;
 
     & > div {
       position: relative;

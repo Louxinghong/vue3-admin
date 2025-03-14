@@ -7,6 +7,7 @@
       :draggable="draggable"
       :mask-closable="maskClosable"
       :before-close="onCancel"
+      :footer="footer"
       @ok="onConfirm"
       @cancel="onCancel"
     >
@@ -24,6 +25,7 @@ interface Props {
   title?: string;
   draggable?: boolean;
   maskClosable?: boolean;
+  footer?: boolean;
 }
 
 const {
@@ -32,10 +34,13 @@ const {
   titleAlign = "start",
   title = "title",
   draggable = false,
-  maskClosable = false
+  maskClosable = false,
+  footer = true
 } = defineProps<Props>();
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits<{
+  (e: "close", val?: boolean, id?: number): void;
+}>();
 // 确认操作
 const onConfirm = () => {
   emit("close", true);

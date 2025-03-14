@@ -267,6 +267,95 @@ const useMouse = () => {
   return point;
 };
 const point = useMouse();
+
+class Person {
+  private name: string;
+  private age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  public getName() {
+    return this.name;
+  }
+
+  public getAge() {
+    return this.age;
+  }
+}
+
+const person = new Person("Linbudu", 18);
+
+console.log(person.name); // 属性“name”为私有属性，只能在类“Person”中访问。
+console.log(person.getName()); // Linbudu
+
+interface User {
+  name: string;
+  age: number;
+}
+const userData: User = {
+  name: "Linbudu",
+  age: 18
+};
+type PartialUser = Partial<User>; // 全变为可选，Required全变为必选
+const partiaUser: PartialUser = {
+  name: "Linbudu"
+};
+
+type UserProps = "name" | "age" | "job";
+type RecordUser = Record<UserProps, string>; // 声明一个内部属性键类型一致、键值类型也一致的对象类型，Pick选择，Omit排除
+const recordUser: RecordUser = {
+  name: "Linbudu",
+  age: "18",
+  job: "programmer"
+};
+
+// type UserProps = 'name' | 'age' | 'email' | 'phone' | 'address';
+// type RequiredUserProps = 'name' | 'email';
+
+// // OptionalUserProps = UserProps - RequiredUserProps
+// type OptionalUserProps = Exclude<UserProps, RequiredUserProps>;
+
+// const optionalUserProps: OptionalUserProps = 'age'; // 'age' | 'phone' | 'address';
+
+// type UserProps = 'name' | 'age' | 'email' | 'phone' | 'address';
+// type RequiredUserProps = 'name' | 'email';
+
+// type RequiredUserPropsOnly = Extract<UserProps, RequiredUserProps>;
+
+// const requiredUserPropsOnly: RequiredUserPropsOnly = 'name'; // 'name' | 'email';
+
+type Add = (x: number, y: number) => number;
+type AddParams = Parameters<Add>; // [number, number] 类型
+type AddResult = ReturnType<Add>; // number 类型
+const addParams: AddParams = [1, 2];
+const addResult: AddResult = 3;
+
+// 定义一个函数，该函数返回一个 Promise 对象
+const getPromise = async () => {
+  return new Promise<string>((resolve) => {
+    setTimeout(() => {
+      resolve("Hello, World!");
+    }, 1000);
+  });
+};
+type Result = Awaited<ReturnType<typeof getPromise>>; // string 类型
+
+type Version = `${number}.${number}.${number}`;
+const v1: Version = "1.1.0";
+const v2: Version = "1.0"; // 报错：类型 "1.0" 不能赋值给类型 `${number}.${number}.${number}`
+const v3: Version = "a.0.0"; // 报错：类型 "a.0" 不能赋值给类型 `${number}.${number}.${number}`
+
+// 字符串字面量类型自动分发
+type Brand = "iphone" | "xiaomi" | "honor";
+type SKU = `${Brand}`; // "iphone" | "xiaomi" | "honor"
+
+const tupleData = ["tesla", "model 3", "model X", "model Y"] as const;
+type TupleToObject<T extends readonly PropertyKey[]> = {
+  [Key in T[number]]: Key;
+};
 </script>
 
 <style lang="scss" scoped>
