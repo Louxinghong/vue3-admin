@@ -21,7 +21,7 @@ const setFlowItemRef = (el: any) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .waterfall-flow {
   display: grid;
   grid-auto-flow: row dense;

@@ -1,8 +1,10 @@
 import vue from "@vitejs/plugin-vue";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { resolve } from "path";
+import { UserConfigExport } from "vite"; // 引入 Vite 的 UserConfigExport 类型
 
-export default () => {
+// 为默认导出的函数添加类型注释
+export default (): UserConfigExport => {
   return {
     plugins: [
       vue(),
@@ -25,38 +27,28 @@ export default () => {
         // customDomId: '__svg__icons__dom__',
       })
     ],
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {
+            "arcoblue-6": "#222"
+          },
+          javascriptEnabled: true
+        }
+      }
+    },
     resolve: {
       alias: {
         path: "path-browserify",
         "@": resolve(__dirname, "src")
       }
     },
-    base: "/vue3-admin/",
-    build: {
-      outDir: "docs"
-    },
+    base: "./",
     server: {
       port: 4000,
       open: true,
       cors: true,
-      proxy: {
-        "/qingyunke-api": {
-          target: "http://api.qingyunke.com/api.php",
-          changeOrigin: true,
-          ws: true
-          // rewrite: (path: string) => path.replace(/^\/api/, '')
-        },
-        "/bilibili-api": {
-          target: "https://api.bilibili.com",
-          changeOrigin: true,
-          ws: true
-        },
-        "/ai-api": {
-          target: "https://api.chatanywhere.tech",
-          changeOrigin: true,
-          ws: true
-        }
-      }
+      proxy: {}
     }
   };
 };

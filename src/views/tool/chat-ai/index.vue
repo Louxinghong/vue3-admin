@@ -83,7 +83,7 @@ const onSendMessage = async () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .chat-ai {
   display: flex;
   flex-flow: column nowrap;

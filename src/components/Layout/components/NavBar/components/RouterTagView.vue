@@ -7,7 +7,11 @@
     <div ref="menuListRef" class="list">
       <div ref="menuScrollContentRef" class="scroll-content">
         <router-link
-          :id="[props.currentRouteData.path === item.path ? 'list-item-actived' : 'list-item']"
+          :id="[
+            props.currentRouteData.path === item.path
+              ? 'list-item-actived'
+              : 'list-item',
+          ]"
           class="list-item"
           v-for="(item, index) in tagList"
           :key="item.path"
@@ -15,7 +19,10 @@
           @click="onChangeRouter(index)"
         >
           <span
-            :class="['tag', props.currentRouteData.path === item.path ? 'tag-actived' : '']"
+            :class="[
+              'tag',
+              props.currentRouteData.path === item.path ? 'tag-actived' : '',
+            ]"
           ></span>
           {{ item.title }}
           <icon-close
@@ -46,8 +53,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   currentRouteData: () => ({
     title: "",
-    path: ""
-  })
+    path: "",
+  }),
 });
 
 // 路由模块管理
@@ -82,20 +89,24 @@ const onHistoryMenuLeft = () => {
 // 右侧内容展示(向左滚动)
 const onHistoryMenuRight = () => {
   const restMoveWidth =
-    menuScrollContentWidth.value - menuListlWidth.value - Math.abs(menuScrollContentLeft.value);
+    menuScrollContentWidth.value -
+    menuListlWidth.value -
+    Math.abs(menuScrollContentLeft.value);
   menuScrollContentRef.value.style.left = `${
-    menuScrollContentLeft.value - (restMoveWidth < 0 ? 0 : restMoveWidth < 75 ? restMoveWidth : 75)
+    menuScrollContentLeft.value -
+    (restMoveWidth < 0 ? 0 : restMoveWidth < 75 ? restMoveWidth : 75)
   }px`;
 };
 // 点击路由tagview
 const onChangeRouter = (index: number) => {
   const listItemEl: any = document.getElementsByClassName("list-item")[index];
-  const moveWidth = listItemEl.offsetWidth + listItemEl.offsetLeft - menuListlWidth.value;
+  const moveWidth =
+    listItemEl.offsetWidth + listItemEl.offsetLeft - menuListlWidth.value;
   moveWidth > 0 && (menuScrollContentRef.value.style.left = `-${moveWidth}px`);
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .history-menu-list {
   display: flex;
   align-items: center;
@@ -161,7 +172,7 @@ const onChangeRouter = (index: number) => {
         background: #e5e5e5;
 
         &-actived {
-          background: #165dff;
+          background: #222;
         }
       }
 

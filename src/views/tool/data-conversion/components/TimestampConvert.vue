@@ -31,7 +31,7 @@ const onExchange = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .convert-content {
   display: flex;
   align-items: center;

@@ -25,7 +25,7 @@ const onBackDashboard = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .error-container {
   position: absolute;
   top: 50%;

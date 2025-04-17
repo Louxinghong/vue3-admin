@@ -48,11 +48,21 @@
 
     <!-- 可复用性 - 鼠标坐标 -->
     <p>x: {{ point.x }}, y: {{ point.y }}</p>
+
+    <search-table
+      :search-config="searchConfig"
+      :search-form="searchForm"
+      :table-config="tableConfig"
+    >
+      <template #userNo="{ record }">
+        {{ record }}
+      </template>
+    </search-table>
   </div>
 </template>
 
 <script name="TestDemo" lang="ts" setup>
-import { ref, computed, watch, customRef, onMounted, onUnmounted } from "vue";
+import { ref, computed, watch, customRef, onMounted, onUnmounted, provide } from "vue";
 import TestSon from "./components/TestSon.vue";
 import { getAIData } from "@/api/index";
 import useCalculate from "@/hooks/useCalculate";
@@ -356,9 +366,194 @@ const tupleData = ["tesla", "model 3", "model X", "model Y"] as const;
 type TupleToObject<T extends readonly PropertyKey[]> = {
   [Key in T[number]]: Key;
 };
+
+
+
+interface SearchForm {
+  name: string;
+  post: string;
+  isRead: boolean;
+  date: Date[];
+  borrowDate: Date[];
+}
+
+// 搜索配置
+const searchConfig = [
+  {
+    prop: "name",
+    label: "用户手机号",
+    type: "input",
+  },
+  {
+    prop: "post",
+    label: "注册渠道",
+    key: "post",
+    type: "select",
+    options: [
+      {
+        label: "微信",
+        value: "1",
+      },
+      {
+        label: "支付宝",
+        value: "2",
+      },
+      {
+        label: "其他",
+        value: "3",
+      },
+    ],
+  },
+  {
+    prop: "post",
+    label: "押金状态",
+    type: "select",
+    options: [
+      {
+        label: "微信",
+        value: "1",
+      },
+      {
+        label: "支付宝",
+        value: "2",
+      },
+      {
+        label: "其他",
+        value: "3",
+      },
+    ],
+  },
+  {
+    prop: "post",
+    label: "用户来源",
+    type: "select",
+    options: [
+      {
+        label: "微信",
+        value: "1",
+      },
+      {
+        label: "支付宝",
+        value: "2",
+      },
+      {
+        label: "其他",
+        value: "3",
+      },
+    ],
+  },
+  {
+    prop: "date",
+    label: "注册日期",
+    type: "dateRange",
+  },
+  {
+    prop: "borrowDate",
+    label: "最近租借日期",
+    type: "dateRange",
+  },
+];
+// 搜索表单
+const searchForm = ref<SearchForm>({
+  name: "",
+  post: "",
+  isRead: false,
+  date: [],
+  borrowDate: [],
+});
+// 表格配置
+const tableConfig = [
+  {
+    title: "用户编号",
+    dataIndex: "userNo",
+    align: "center",
+    slotName: "userNo",
+  },
+  {
+    title: "用户手机号",
+    align: "center",
+    children: [
+      {
+        title: "手机号1",
+        dataIndex: "phone",
+        align: "center",
+      },
+      {
+        title: "手机号2",
+        dataIndex: "phone",
+        align: "center",
+      },
+    ],
+  },
+  {
+    title: "注册渠道",
+    dataIndex: "phone",
+    align: "center",
+    filterOptions: "testOptions",
+  },
+  {
+    title: "押金金额",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "状态",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "优惠券",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "累计租借次数",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "最近租借时间",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "最近访问时间",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "注册时间",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "用户来源",
+    dataIndex: "phone",
+    align: "center",
+  },
+  {
+    title: "操作",
+    dataIndex: "action",
+    fixed: "right",
+    align: "center",
+    width: 100,
+    actions: [
+      {
+        label: "编辑",
+        type: "primary",
+        methods: "onEdit",
+      },
+    ],
+  },
+];
+const onEdit = (rowIndex: any) => {
+  console.log(rowIndex);
+};
+// 数据传送
+provide("provideData", { searchConfig, searchForm, tableConfig, onEdit });
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 // 在局部文件了里全局生效
 // :global(body) {
 //   width: 100vw;

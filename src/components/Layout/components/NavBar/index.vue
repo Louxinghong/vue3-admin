@@ -2,16 +2,12 @@
   <div class="nav-bar">
     <div class="menu-user">
       <div class="current-menu">
-        <svg-icon
-          class="is-collapsed"
-          size="35px"
-          :name="`scale-${isCollapsed ? 'out' : 'in'}`"
-          @click="onChangeSideBarStatus"
-        ></svg-icon>
+        <svg-icon v-show="isCollapsed" name="scale-out" size="28px" @click="onChangeSideBarStatus"></svg-icon>
+        <svg-icon v-show="!isCollapsed" name="scale-in" size="28px" @click="onChangeSideBarStatus"></svg-icon>
         <span class="menu-title">{{ currentRouteData.title }}</span>
       </div>
 
-      <img class="user-img" :src="USER_IMG" alt="logo" />
+      <img class="user-img" :src="userImg"></img>
     </div>
 
     <router-tag-view :current-route-data="currentRouteData"></router-tag-view>
@@ -26,7 +22,8 @@ import { useRouter } from "vue-router";
 import { RouterTagViewConfig } from "@/utils/interface";
 import RouterTagView from "./components/RouterTagView.vue";
 
-const USER_IMG = new URL("@/assets/images/user.jpg", import.meta.url).href;
+const userImg = new URL("@/assets/images/user.jpg", import.meta.url).href;
+
 // 侧栏状态管理
 const statusStore = useStatusStore();
 const { isCollapsed } = storeToRefs(statusStore);
@@ -39,13 +36,13 @@ const currentRouteData = computed<RouterTagViewConfig>(() => {
   const currentRoute = router.currentRoute.value;
   const currentData = {
     title: currentRoute.meta.title,
-    path: currentRoute.path
+    path: currentRoute.path,
   };
   return currentData;
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .nav-bar {
   position: absolute;
   top: 0;
@@ -68,18 +65,14 @@ const currentRouteData = computed<RouterTagViewConfig>(() => {
     display: flex;
     align-items: center;
 
-    .is-collapsed {
-      cursor: pointer;
-    }
-
     .menu-title {
-      margin-left: 10px;
+      margin-left: 5px;
     }
   }
 
   .user-img {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
   }
 }

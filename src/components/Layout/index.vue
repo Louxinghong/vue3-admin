@@ -3,7 +3,7 @@
     :class="[
       'layout',
       `layout${isCollapsed ? '' : '-no'}-collapsed`,
-      isMobile ? 'layout-mobile' : ''
+      isMobile ? 'layout-mobile' : '',
     ]"
   >
     <div
@@ -46,16 +46,16 @@ const onCollapsed = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .layout-collapsed {
   .side-bar {
-    width: 50px;
+    width: 55px;
   }
 
   .nav-bar,
   .main-container {
-    left: 50px;
-    width: calc(100% - 50px);
+    left: 55px;
+    width: calc(100% - 55px);
   }
 
   :deep(.route-header) {
@@ -87,7 +87,7 @@ const onCollapsed = () => {
     bottom: 0;
     width: 100%;
     height: 100%;
-    background: rgba($color: #000000, $alpha: 0.6);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 999;
   }
 }

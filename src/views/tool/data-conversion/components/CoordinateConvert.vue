@@ -216,7 +216,7 @@ const onConvertCoordinate = async () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .type-select {
   margin: 10px 0 20px;
 }

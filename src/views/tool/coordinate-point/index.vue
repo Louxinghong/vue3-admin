@@ -59,7 +59,7 @@ const onDrawPoint = (params: Array<lngLatData>) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .coordinate-point {
   width: 100%;
   height: 100%;

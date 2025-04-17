@@ -110,7 +110,7 @@ const onUploadFile = (list: Array<batchLngLatData>) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .input-lng,
 .input-lat {
   width: 120px;

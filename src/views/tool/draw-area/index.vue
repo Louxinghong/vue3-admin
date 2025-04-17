@@ -152,7 +152,7 @@ const onTransPPoint = (list: Array<any>) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .map-container {
   width: 100%;
   height: 100%;

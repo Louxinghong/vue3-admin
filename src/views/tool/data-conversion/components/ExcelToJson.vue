@@ -15,7 +15,7 @@ const onUploadFile = (list: []) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .json-viewer {
   margin-top: 10px;
 }

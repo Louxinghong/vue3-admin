@@ -5,9 +5,9 @@
       :content="['admin', dayjs().format('YYYY-MM-DD')]"
       :gap="[90, 50]"
     >
-      <router-view class="view" v-slot="{ Component }">
+      <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
-          <component :is="Component" />
+          <component :is="Component" :key="$route.fullPath" />
         </transition>
       </router-view>
     </a-watermark>
@@ -18,7 +18,7 @@
 import dayjs from "dayjs";
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .main-container {
   position: absolute;
   top: 92px;

@@ -38,7 +38,7 @@ const onConvertJsonToExcel = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .type-select {
   margin-bottom: 10px;
 }

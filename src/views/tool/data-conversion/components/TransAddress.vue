@@ -54,7 +54,7 @@ const coordinateToAddress = async () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .trans-address {
   display: flex;
   justify-content: space-between;
