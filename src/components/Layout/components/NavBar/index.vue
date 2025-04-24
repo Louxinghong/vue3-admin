@@ -2,12 +2,22 @@
   <div class="nav-bar">
     <div class="menu-user">
       <div class="current-menu">
-        <svg-icon v-show="isCollapsed" name="scale-out" size="28px" @click="onChangeSideBarStatus"></svg-icon>
-        <svg-icon v-show="!isCollapsed" name="scale-in" size="28px" @click="onChangeSideBarStatus"></svg-icon>
+        <svg-icon
+          v-show="isCollapsed"
+          name="scale-out"
+          size="28px"
+          @click="onChangeSideBarStatus"
+        ></svg-icon>
+        <svg-icon
+          v-show="!isCollapsed"
+          name="scale-in"
+          size="28px"
+          @click="onChangeSideBarStatus"
+        ></svg-icon>
         <span class="menu-title">{{ currentRouteData.title }}</span>
       </div>
 
-      <img class="user-img" :src="userImg"></img>
+      <img class="user-img" :src="userImg" />
     </div>
 
     <router-tag-view :current-route-data="currentRouteData"></router-tag-view>
@@ -36,7 +46,7 @@ const currentRouteData = computed<RouterTagViewConfig>(() => {
   const currentRoute = router.currentRoute.value;
   const currentData = {
     title: currentRoute.meta.title,
-    path: currentRoute.path,
+    path: currentRoute.path
   };
   return currentData;
 });
