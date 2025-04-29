@@ -5,26 +5,16 @@
       :align="columnConfig.align"
       :fixed="columnConfig.fixed || ''"
     >
-      <template
-        v-if="columnConfig.children && columnConfig.children.length > 0"
-      >
+      <template v-if="columnConfig.children && columnConfig.children.length > 0">
         <table-item
           v-for="item in columnConfig.children"
           :key="item.dataIndex"
           :column-config="item"
         ></table-item>
       </template>
-      <template
-        v-if="!columnConfig.children"
-        #cell="{ record, column, rowIndex }"
-      >
+      <template v-if="!columnConfig.children" #cell="{ record, column, rowIndex }">
         <template v-if="columnConfig.filterOptions">
-          {{
-            filterDataInOptions(
-              record[columnConfig.dataIndex],
-              columnConfig.filterOptions
-            )
-          }}
+          {{ filterDataInOptions(record[columnConfig.dataIndex], columnConfig.filterOptions) }}
         </template>
         <template v-else-if="columnConfig.dataIndex === 'action'">
           <a-button
@@ -76,7 +66,7 @@ const { columnConfig } = defineProps<Props>();
 // 根据枚举类展示转换后的数据
 const filterDataInOptions = (data: any, options: keyof typeof enumOptions) => {
   return enumOptions[options].find(
-    (item: CommonConfig.EnumOptions) => Number(item.value) === Number(data)
+    (item: CommonConfig.OptionsConfig) => Number(item.value) === Number(data)
   )?.label;
 };
 

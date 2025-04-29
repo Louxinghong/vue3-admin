@@ -1,5 +1,5 @@
 declare namespace CommonConfig {
-  interface OptionsConfig<T, U> {
+  interface OptionsConfig<T = string, U = number> {
     label: T;
     value: U;
   }

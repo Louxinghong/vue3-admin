@@ -298,7 +298,7 @@ class Person {
 
 const person = new Person("Linbudu", 18);
 
-console.log(person.name); // 属性“name”为私有属性，只能在类“Person”中访问。
+// console.log(person.name); // 属性“name”为私有属性，只能在类“Person”中访问。
 console.log(person.getName()); // Linbudu
 
 interface User {
@@ -353,10 +353,10 @@ const getPromise = async () => {
 };
 type Result = Awaited<ReturnType<typeof getPromise>>; // string 类型
 
-type Version = `${number}.${number}.${number}`;
-const v1: Version = "1.1.0";
-const v2: Version = "1.0"; // 报错：类型 "1.0" 不能赋值给类型 `${number}.${number}.${number}`
-const v3: Version = "a.0.0"; // 报错：类型 "a.0" 不能赋值给类型 `${number}.${number}.${number}`
+// type Version = `${number}.${number}.${number}`;
+// const v1: Version = "1.1.0";
+// const v2: Version = "1.0"; // 报错：类型 "1.0" 不能赋值给类型 `${number}.${number}.${number}`
+// const v3: Version = "a.0.0"; // 报错：类型 "a.0" 不能赋值给类型 `${number}.${number}.${number}`
 
 // 字符串字面量类型自动分发
 type Brand = "iphone" | "xiaomi" | "honor";
@@ -366,8 +366,6 @@ const tupleData = ["tesla", "model 3", "model X", "model Y"] as const;
 type TupleToObject<T extends readonly PropertyKey[]> = {
   [Key in T[number]]: Key;
 };
-
-
 
 interface SearchForm {
   name: string;
@@ -382,7 +380,7 @@ const searchConfig = [
   {
     prop: "name",
     label: "用户手机号",
-    type: "input",
+    type: "input"
   },
   {
     prop: "post",
@@ -392,17 +390,17 @@ const searchConfig = [
     options: [
       {
         label: "微信",
-        value: "1",
+        value: "1"
       },
       {
         label: "支付宝",
-        value: "2",
+        value: "2"
       },
       {
         label: "其他",
-        value: "3",
-      },
-    ],
+        value: "3"
+      }
+    ]
   },
   {
     prop: "post",
@@ -411,17 +409,17 @@ const searchConfig = [
     options: [
       {
         label: "微信",
-        value: "1",
+        value: "1"
       },
       {
         label: "支付宝",
-        value: "2",
+        value: "2"
       },
       {
         label: "其他",
-        value: "3",
-      },
-    ],
+        value: "3"
+      }
+    ]
   },
   {
     prop: "post",
@@ -430,28 +428,28 @@ const searchConfig = [
     options: [
       {
         label: "微信",
-        value: "1",
+        value: "1"
       },
       {
         label: "支付宝",
-        value: "2",
+        value: "2"
       },
       {
         label: "其他",
-        value: "3",
-      },
-    ],
+        value: "3"
+      }
+    ]
   },
   {
     prop: "date",
     label: "注册日期",
-    type: "dateRange",
+    type: "dateRange"
   },
   {
     prop: "borrowDate",
     label: "最近租借日期",
-    type: "dateRange",
-  },
+    type: "dateRange"
+  }
 ];
 // 搜索表单
 const searchForm = ref<SearchForm>({
@@ -459,7 +457,7 @@ const searchForm = ref<SearchForm>({
   post: "",
   isRead: false,
   date: [],
-  borrowDate: [],
+  borrowDate: []
 });
 // 表格配置
 const tableConfig = [
@@ -467,7 +465,7 @@ const tableConfig = [
     title: "用户编号",
     dataIndex: "userNo",
     align: "center",
-    slotName: "userNo",
+    slotName: "userNo"
   },
   {
     title: "用户手机号",
@@ -476,60 +474,60 @@ const tableConfig = [
       {
         title: "手机号1",
         dataIndex: "phone",
-        align: "center",
+        align: "center"
       },
       {
         title: "手机号2",
         dataIndex: "phone",
-        align: "center",
-      },
-    ],
+        align: "center"
+      }
+    ]
   },
   {
     title: "注册渠道",
     dataIndex: "phone",
     align: "center",
-    filterOptions: "testOptions",
+    filterOptions: "testOptions"
   },
   {
     title: "押金金额",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "状态",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "优惠券",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "累计租借次数",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "最近租借时间",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "最近访问时间",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "注册时间",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "用户来源",
     dataIndex: "phone",
-    align: "center",
+    align: "center"
   },
   {
     title: "操作",
@@ -541,16 +539,31 @@ const tableConfig = [
       {
         label: "编辑",
         type: "primary",
-        methods: "onEdit",
-      },
-    ],
-  },
+        methods: "onEdit"
+      }
+    ]
+  }
 ];
 const onEdit = (rowIndex: any) => {
   console.log(rowIndex);
 };
 // 数据传送
 provide("provideData", { searchConfig, searchForm, tableConfig, onEdit });
+
+// 实现一个Pick方法，从类型T中选择出一组属性K，构造一个新的类型
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+type MyPick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+type TodoPreview = MyPick<Todo, "title" | "completed">;
+const todo: TodoPreview = {
+  title: "Clean room",
+  completed: false
+};
 </script>
 
 <style lang="less" scoped>
