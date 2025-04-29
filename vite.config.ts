@@ -43,7 +43,10 @@ export default (): UserConfigExport => {
         "@": resolve(__dirname, "src")
       }
     },
-    base: "./",
+    base: "/vue3-admin/",
+    build: {
+      outDir: "docs"
+    },
     server: {
       port: 4000,
       open: true,
