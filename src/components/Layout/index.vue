@@ -3,7 +3,7 @@
     :class="[
       'layout',
       `layout${isCollapsed ? '' : '-no'}-collapsed`,
-      isMobile ? 'layout-mobile' : '',
+      isMobile ? 'layout-mobile' : ''
     ]"
   >
     <div
@@ -59,7 +59,7 @@ const onCollapsed = () => {
   }
 
   :deep(.route-header) {
-    margin-left: -10px;
+    margin-left: -9.5px;
   }
 }
 

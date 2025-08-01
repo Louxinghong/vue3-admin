@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed } from "vue";
 
 const props = defineProps({
   prefix: {
     type: String,
-    default: 'icon'
+    default: "icon"
   },
   name: {
     type: String,
@@ -18,13 +18,13 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: '#333'
+    default: "#222"
   },
   size: {
     type: String,
-    default: '1.5em'
+    default: "16px"
   }
-})
+});
 
-const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 </script>

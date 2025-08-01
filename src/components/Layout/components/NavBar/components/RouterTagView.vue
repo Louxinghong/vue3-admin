@@ -7,11 +7,7 @@
     <div ref="menuListRef" class="list">
       <div ref="menuScrollContentRef" class="scroll-content">
         <router-link
-          :id="[
-            props.currentRouteData.path === item.path
-              ? 'list-item-actived'
-              : 'list-item',
-          ]"
+          :id="[props.currentRouteData.path === item.path ? 'list-item-actived' : 'list-item']"
           class="list-item"
           v-for="(item, index) in tagList"
           :key="item.path"
@@ -19,10 +15,7 @@
           @click="onChangeRouter(index)"
         >
           <span
-            :class="[
-              'tag',
-              props.currentRouteData.path === item.path ? 'tag-actived' : '',
-            ]"
+            :class="['tag', props.currentRouteData.path === item.path ? 'tag-actived' : '']"
           ></span>
           {{ item.title }}
           <icon-close
@@ -45,16 +38,15 @@ import { useRouter } from "vue-router";
 import useRouterTagStore from "@/store/modules/routerTag";
 import { storeToRefs } from "pinia";
 import { IconLeft, IconRight, IconClose } from "@arco-design/web-vue/es/icon";
-import { RouterTagViewConfig } from "@/utils/interface";
 
 interface Props {
-  currentRouteData: RouterTagViewConfig;
+  currentRouteData: CommonConfig.RouterTagViewConfig;
 }
 const props = withDefaults(defineProps<Props>(), {
   currentRouteData: () => ({
     title: "",
-    path: "",
-  }),
+    path: ""
+  })
 });
 
 // 路由模块管理
@@ -89,19 +81,15 @@ const onHistoryMenuLeft = () => {
 // 右侧内容展示(向左滚动)
 const onHistoryMenuRight = () => {
   const restMoveWidth =
-    menuScrollContentWidth.value -
-    menuListlWidth.value -
-    Math.abs(menuScrollContentLeft.value);
+    menuScrollContentWidth.value - menuListlWidth.value - Math.abs(menuScrollContentLeft.value);
   menuScrollContentRef.value.style.left = `${
-    menuScrollContentLeft.value -
-    (restMoveWidth < 0 ? 0 : restMoveWidth < 75 ? restMoveWidth : 75)
+    menuScrollContentLeft.value - (restMoveWidth < 0 ? 0 : restMoveWidth < 75 ? restMoveWidth : 75)
   }px`;
 };
 // 点击路由tagview
 const onChangeRouter = (index: number) => {
   const listItemEl: any = document.getElementsByClassName("list-item")[index];
-  const moveWidth =
-    listItemEl.offsetWidth + listItemEl.offsetLeft - menuListlWidth.value;
+  const moveWidth = listItemEl.offsetWidth + listItemEl.offsetLeft - menuListlWidth.value;
   moveWidth > 0 && (menuScrollContentRef.value.style.left = `-${moveWidth}px`);
 };
 </script>
@@ -155,12 +143,12 @@ const onChangeRouter = (index: number) => {
       line-height: 28px;
       background: #fff;
       color: #797979;
-      border-radius: 2px;
       cursor: pointer;
       text-decoration: none;
+      border-radius: 4px;
 
       &:not(:last-child) {
-        margin-right: 5px;
+        margin-right: 4px;
       }
 
       .tag {

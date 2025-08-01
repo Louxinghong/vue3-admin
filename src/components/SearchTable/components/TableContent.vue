@@ -5,21 +5,14 @@
       :data="tableData"
       :bordered="{ cell: true }"
       :scroll="{
-        x: '120%',
+        x: '100%'
       }"
+      stripe
       scrollbar
     >
       <template #columns>
-        <table-item
-          v-for="item in provideData.tableConfig"
-          :key="item.dataIndex"
-          :column-config="item"
-        >
-          <template
-            v-for="item in Object.keys(slots)"
-            :key="item"
-            #[item]="{ record }"
-          >
+        <table-item v-for="item in tableConfig" :key="item.dataIndex" :column-config="item">
+          <template v-for="item in Object.keys(slots)" :key="item" #[item]="{ record }">
             <slot :name="item" :record="record"></slot>
           </template>
         </table-item>
@@ -41,5 +34,7 @@ interface Props {
 const { loading = false, tableData = [] } = defineProps<Props>();
 
 // 获取最上级组件传递的数据
-const provideData: any = inject("provideData");
+const { tableConfig } = inject<{
+  tableConfig: Array<CommonConfig.TableColumnConfig>;
+}>("provideData")!;
 </script>

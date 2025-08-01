@@ -8,7 +8,7 @@ interface Pagination {
   onChange(size: number, current: number): void;
 }
 
-interface TableResult extends CommonConfig.ApiResult {
+interface TableResult extends CommonConfig.RequestResult {
   data: {
     list: [];
     page: {

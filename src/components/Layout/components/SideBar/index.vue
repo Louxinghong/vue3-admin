@@ -20,16 +20,14 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script name="SideBar" setup lang="ts">
 import router from "@/router/index";
 import BarItem from "./components/BarItem.vue";
 import { useRouter } from "vue-router";
 import useStatusStore from "@/store/modules/status";
 import { storeToRefs } from "pinia";
 
-const routeHeader = router.options.routes.filter(
-  (item) => item.meta?.isDashboard
-)[0];
+const routeHeader = router.options.routes.filter((item) => item.meta?.isDashboard)[0];
 const routeList = router.options.routes.filter(
   (item) => !item.meta?.hidden && !item.meta?.isDashboard
 );
@@ -41,13 +39,16 @@ const { isCollapsed } = storeToRefs(statusStore);
 .side-bar {
   width: 250px;
   background: #fff;
-  box-shadow: 1px 0px 10px 1px #c1c1c1;
-  border-right: 1px solid #dcdcdc;
   transition: width 0.5s;
 }
 
 .arco-menu {
   height: 100vh;
+  border-right: 1px solid #ececec;
+
+  &-collapsed {
+    width: 55px;
+  }
 
   :deep(.arco-menu-inner) {
     padding: 10px 5px;
@@ -66,11 +67,16 @@ const { isCollapsed } = storeToRefs(statusStore);
       background-color: #fff;
       border-radius: 10px;
     }
+
+    .arco-menu-selected {
+      border-radius: 6px;
+    }
   }
 
   .route-header {
     font-size: 20px;
     font-weight: bolder;
+    color: #222;
 
     &.arco-menu-selected {
       font-weight: bolder;
