@@ -163,13 +163,13 @@ const onChangeY = () => {
   y.value = 3;
 };
 
-const aOptions: CommonConfig.OptionsConfig<string, number>[] = [
+const aOptions: CommonConfig.EnumOptions<string, number>[] = [
   {
     label: "1",
     value: 1
   }
 ];
-const bOptions: CommonConfig.OptionsConfig<string, string>[] = [
+const bOptions: CommonConfig.EnumOptions<string, string>[] = [
   {
     label: "标题1",
     value: "1"

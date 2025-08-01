@@ -4,8 +4,8 @@
       <icon-left />
     </a-button>
 
-    <div ref="menuListRef" class="list">
-      <div ref="menuScrollContentRef" class="scroll-content">
+    <div ref="menuList" class="list">
+      <div ref="menuScrollContent" class="scroll-content">
         <router-link
           :id="[props.currentRouteData.path === item.path ? 'list-item-actived' : 'list-item']"
           class="list-item"
@@ -33,7 +33,7 @@
 </template>
 
 <script name="RouterTagView" lang="ts" setup>
-import { ref, computed } from "vue";
+import { computed, useTemplateRef } from "vue";
 import { useRouter } from "vue-router";
 import useRouterTagStore from "@/store/modules/routerTag";
 import { storeToRefs } from "pinia";
@@ -58,39 +58,44 @@ const onCloseRouterTag = (index: number) => {
   router.push(tagList.value[0].path);
 };
 
-const menuListRef = ref(); // 历史目录dom
-const menuScrollContentRef = ref(); // 历史目录内部可滚动区域dom
+const menuListRef = useTemplateRef("menuList"); // 历史目录dom
+const menuScrollContentRef = useTemplateRef("menuScrollContent"); // 历史目录内部可滚动区域dom
 // 历史目录dom宽度
 const menuListlWidth = computed(() => {
-  return menuListRef.value.offsetWidth;
+  return menuListRef?.value?.offsetWidth || 0;
 });
 // 历史目录内部可滚动区域dom宽度
 const menuScrollContentWidth = computed(() => {
-  return menuScrollContentRef.value.offsetWidth;
+  return menuScrollContentRef?.value?.offsetWidth || 0;
 });
 // 可滚动区域的left值
 const menuScrollContentLeft = computed(() => {
-  return menuScrollContentRef.value.offsetLeft;
+  return menuScrollContentRef?.value?.offsetLeft || 0;
 });
 // 左侧内容展示(向右滚动)
 const onHistoryMenuLeft = () => {
-  menuScrollContentRef.value.style.left = `${
-    menuScrollContentLeft.value < 75 ? 0 : menuScrollContentLeft.value + 75
-  }px`;
+  menuScrollContentRef.value &&
+    (menuScrollContentRef.value.style.left = `${
+      menuScrollContentLeft.value < 75 ? 0 : menuScrollContentLeft.value + 75
+    }px`);
 };
 // 右侧内容展示(向左滚动)
 const onHistoryMenuRight = () => {
   const restMoveWidth =
     menuScrollContentWidth.value - menuListlWidth.value - Math.abs(menuScrollContentLeft.value);
-  menuScrollContentRef.value.style.left = `${
-    menuScrollContentLeft.value - (restMoveWidth < 0 ? 0 : restMoveWidth < 75 ? restMoveWidth : 75)
-  }px`;
+  menuScrollContentRef.value &&
+    (menuScrollContentRef.value.style.left = `${
+      menuScrollContentLeft.value -
+      (restMoveWidth < 0 ? 0 : restMoveWidth < 75 ? restMoveWidth : 75)
+    }px`);
 };
 // 点击路由tagview
 const onChangeRouter = (index: number) => {
   const listItemEl: any = document.getElementsByClassName("list-item")[index];
   const moveWidth = listItemEl.offsetWidth + listItemEl.offsetLeft - menuListlWidth.value;
-  moveWidth > 0 && (menuScrollContentRef.value.style.left = `-${moveWidth}px`);
+  moveWidth > 0 &&
+    menuScrollContentRef.value &&
+    (menuScrollContentRef.value.style.left = `-${moveWidth}px`);
 };
 </script>
 

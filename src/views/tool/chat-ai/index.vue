@@ -1,6 +1,6 @@
 <template>
   <div class="chat-ai">
-    <ul ref="chatListRef" class="chat-list">
+    <ul ref="chatList" class="chat-list">
       <li v-for="item in messageList" :key="item.id">
         <template v-if="item.id % 2 === 0">
           <svg-icon class="" :name="item.avatar" size="50px" />
@@ -31,16 +31,16 @@
 </template>
 
 <script name="ChatAI" lang="ts" setup>
-import { ref } from "vue";
+import { ref, useTemplateRef } from "vue";
 import { getGptMessage } from "@/api/index";
 import { ChatData } from "@/utils/interface";
-import { cloneDeep } from "lodash";
+import { cloneDeep } from "lodash-es";
 
 const loading = ref<boolean>(false);
 const sendMessage = ref<string>(""); // 每次发送的信息
 const messageList = ref<Array<ChatData>>([]); // 发送信息合集
 const USER_IMG = new URL("@/assets/images/user.jpg", import.meta.url).href;
-const chatListRef = ref(); // 聊天列表dom
+const chatListRef = useTemplateRef("chatList"); // 聊天列表dom
 
 const onSendMessage = async () => {
   if (loading.value) {
@@ -65,7 +65,9 @@ const onSendMessage = async () => {
   });
   // 暂缓等待最新两天信息加入dom
   setTimeout(() => {
-    chatListRef.value.scrollTop = chatListRef.value.scrollHeight - chatListRef.value.clientHeight;
+    chatListRef.value &&
+      (chatListRef.value.scrollTop =
+        chatListRef.value.scrollHeight - chatListRef.value.clientHeight);
   }, 0);
 
   const changeAIMessageData = messageList.value[messageList.value.length - 1];

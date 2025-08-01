@@ -1,10 +1,10 @@
 <template>
   <div class="waterfall-flow">
     <div
-      :ref="setFlowItemRef"
-      class="flow-item"
       v-for="item in 30"
       :key="item"
+      ref="flowItem"
+      class="flow-item"
       :style="{
         gridRowEnd: `span ${(item % 2 === 0 ? 50 : 100) / 2}`
       }"
@@ -13,12 +13,12 @@
 </template>
 
 <script name="WaterfallFlow" lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, useTemplateRef } from "vue";
 
-const flowItemRefs = ref<Array<any>>([]);
-const setFlowItemRef = (el: any) => {
-  flowItemRefs.value.push(el);
-};
+const flowItemRefs = useTemplateRef("flowItem");
+onMounted(() => {
+  console.log(flowItemRefs.value);
+});
 </script>
 
 <style lang="less" scoped>

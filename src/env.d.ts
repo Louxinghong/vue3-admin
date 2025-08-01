@@ -5,3 +5,5 @@ declare module "*.vue" {
 }
 
 declare module "vue-json-viewer";
+
+declare module "lodash-es";

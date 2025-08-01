@@ -2,7 +2,7 @@
   <div class="main-container">
     <a-watermark
       class="water-mark"
-      :content="['admin', dayjs().format('YYYY-MM-DD')]"
+      :content="[userName, dayjs().format('YYYY-MM-DD')]"
       :gap="[90, 50]"
     >
       <router-view v-slot="{ Component }">
@@ -16,15 +16,18 @@
 
 <script name="MainContainer" lang="ts" setup>
 import dayjs from "dayjs";
+import { getLocalStorage } from "@/utils/localStorage";
+
+const userName = getLocalStorage("userName");
 </script>
 
 <style lang="less" scoped>
 .main-container {
   position: absolute;
-  top: 92px;
+  top: 80px;
   left: 250px;
   padding: 10px;
-  height: calc(100% - 92px);
+  height: calc(100% - 80px);
   width: calc(100% - 250px);
   overflow-y: auto;
   background: #fff;
