@@ -57,7 +57,7 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {
   routes: () => [],
-  basePath: ""
+  basePath: "",
 });
 
 const resolvePath = (path: string) => {
@@ -68,7 +68,7 @@ const routerTagStore = useRouterTagStore();
 const onAddToRouterTag = (data: any, path: string) => {
   routerTagStore.addTag({
     title: data.meta.title,
-    path
+    path,
   });
 };
 </script>

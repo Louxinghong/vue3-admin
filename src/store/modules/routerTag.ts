@@ -8,8 +8,8 @@ const useRouterTagStore = defineStore(
     const tagList = ref<Array<RouterTagViewConfig>>([
       {
         title: "首页",
-        path: "/dashboard"
-      }
+        path: "/dashboard",
+      },
     ]);
     const addTag = (data: RouterTagViewConfig) => {
       const findData = tagList.value.find((item) => item.path === data.path);
@@ -22,12 +22,12 @@ const useRouterTagStore = defineStore(
     return {
       tagList,
       addTag,
-      removeTag
+      removeTag,
     };
   },
   {
-    persist: true // 数据持久化, 防止浏览器刷新丢失数据
-  }
+    persist: true, // 数据持久化, 防止浏览器刷新丢失数据
+  },
 );
 
 export default useRouterTagStore;

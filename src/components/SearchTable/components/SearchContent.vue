@@ -11,7 +11,7 @@
             :placeholder="`请输入${item.label}`"
             allow-clear
             :style="{
-              width: `${item.width || 180}px`
+              width: `${item.width || 180}px`,
             }"
           />
         </template>
@@ -22,7 +22,7 @@
             allow-search
             allow-clear
             :style="{
-              width: `${item.width || 180}px`
+              width: `${item.width || 180}px`,
             }"
           >
             <a-option v-for="option in item.options" :key="option.value" :value="option.value">{{

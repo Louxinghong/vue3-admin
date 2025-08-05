@@ -29,7 +29,7 @@ import { storeToRefs } from "pinia";
 
 const routeHeader = router.options.routes.filter((item) => item.meta?.isDashboard)[0];
 const routeList = router.options.routes.filter(
-  (item) => !item.meta?.hidden && !item.meta?.isDashboard
+  (item) => !item.meta?.hidden && !item.meta?.isDashboard,
 );
 const statusStore = useStatusStore();
 const { isCollapsed } = storeToRefs(statusStore);

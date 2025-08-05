@@ -31,7 +31,7 @@ import { getAMapData } from "@/api/index";
 import { Message, Notification } from "@arco-design/web-vue";
 
 defineOptions({
-  name: "DrawArea"
+  name: "DrawArea",
 });
 
 const drawAreaLoading = ref<boolean>(false); // 编辑loading
@@ -45,15 +45,15 @@ let pointMarkers: any = null; // 点标记实例
 
 onMounted(async () => {
   AMap = await getAMapData({
-    mapPlugins: ["AMap.MouseTool", "AMap.PolygonEditor"]
+    mapPlugins: ["AMap.MouseTool", "AMap.PolygonEditor"],
   });
   map = new AMap.Map("map-container", {
-    center: [116.397428, 39.90923]
+    center: [116.397428, 39.90923],
   });
   pointMarkers = new AMap.LabelsLayer({
     zooms: [3, 20],
     zIndex: 1000,
-    collision: false
+    collision: false,
   });
 
   mouseTool = new AMap.MouseTool(map);
@@ -70,7 +70,7 @@ const onDrawArea = () => {
   drawAreaLoading.value = true;
   inputAreaPolygon && inputAreaPolygon.setPath([]);
   mouseTool.polygon({
-    strokeStyle: "dashed"
+    strokeStyle: "dashed",
   });
   map.setDefaultCursor("crosshair");
 };
@@ -86,10 +86,10 @@ const onSaveArea = () => {
       content: `${JSON.stringify(
         resultPath.map((item: any) => {
           return { lng: item.lng, lat: item.lat };
-        })
+        }),
       )}`,
       closable: true,
-      duration: 0
+      duration: 0,
     });
     map.remove(polygonEditor);
   }
@@ -114,12 +114,12 @@ const onCloseInputArea = (value: boolean) => {
         map: map,
         path: JSON.parse(inputAreaInfo.value).map((item: { lng: number; lat: number }) => [
           item.lng,
-          item.lat
+          item.lat,
         ]),
         strokeColor: "#FF7A00",
         strokeStyle: "dashed",
         fillColor: "#FF7A00",
-        fillOpacity: 0.2
+        fillOpacity: 0.2,
       });
       map.setFitView();
     }
@@ -146,8 +146,8 @@ const onTransPPoint = (list: Array<any>) => {
         type: "image",
         image: new URL("@/assets/images/point-marker.png", import.meta.url).href,
         size: [36, 36],
-        anchor: "bottom-center"
-      }
+        anchor: "bottom-center",
+      },
     });
     markerList.push(itemMarker);
   });

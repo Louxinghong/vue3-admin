@@ -2,11 +2,7 @@
   <div class="search-table">
     <search-content :loading="loading" @search="onSearch"></search-content>
     <table-content :loading="loading" :table-data="tableData">
-      <template
-        v-for="item in Object.keys(slots)"
-        :key="item"
-        #[item]="{ record }"
-      >
+      <template v-for="item in Object.keys(slots)" :key="item" #[item]="{ record }">
         <slot :name="item" :record="record"></slot>
       </template>
     </table-content>

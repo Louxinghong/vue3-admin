@@ -66,7 +66,7 @@ const filterDataInOptions = (record: { [key: string]: any }) => {
 
   return enumOptions[columnConfig.options].find(
     (item: CommonConfig.EnumOptions) =>
-      Number(item.value) === Number(record[columnConfig.dataIndex])
+      Number(item.value) === Number(record[columnConfig.dataIndex]),
   );
 };
 

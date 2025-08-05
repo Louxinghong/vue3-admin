@@ -32,7 +32,7 @@ const useTable = <T>(api: Function, params: T) => {
     onChange: (current, size) => {
       pagination.value.current = current;
       pagination.value.size = size;
-    }
+    },
   });
   const tableData = ref<Array<any>>([]);
   const getTableData = async () => {
@@ -41,8 +41,8 @@ const useTable = <T>(api: Function, params: T) => {
       params,
       page: {
         current: pagination.value.current,
-        size: pagination.value.size
-      }
+        size: pagination.value.size,
+      },
     }).finally(() => (loading.value = false));
     if (result.success) {
       tableData.value = result.data.list;
@@ -56,13 +56,13 @@ const useTable = <T>(api: Function, params: T) => {
     () => pagination.value.current,
     () => {
       getTableData();
-    }
+    },
   );
   watch(
     () => pagination.value.size,
     () => {
       pagination.value.current = 1;
-    }
+    },
   );
 
   onMounted(() => getTableData());
@@ -71,7 +71,7 @@ const useTable = <T>(api: Function, params: T) => {
     loading,
     pagination,
     tableData,
-    getTableData
+    getTableData,
   };
 };
 

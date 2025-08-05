@@ -11,12 +11,12 @@ const useRouterCacheStore = defineStore(
 
     return {
       routerCacheList,
-      addRouterCache
+      addRouterCache,
     };
   },
   {
     // persist: true // 数据持久化, 防止浏览器刷新丢失数据
-  }
+  },
 );
 
 export default useRouterCacheStore;

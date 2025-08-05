@@ -45,8 +45,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   currentRouteData: () => ({
     title: "",
-    path: ""
-  })
+    path: "",
+  }),
 });
 
 // 路由模块管理

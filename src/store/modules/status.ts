@@ -18,12 +18,12 @@ const useStatusStore = defineStore(
       isCollapsed,
       changeSideBarStatus,
       isMobile,
-      changeIsMoblieStatus
+      changeIsMoblieStatus,
     };
   },
   {
-    persist: true // 数据持久化, 防止浏览器刷新丢失数据
-  }
+    persist: true, // 数据持久化, 防止浏览器刷新丢失数据
+  },
 );
 
 export default useStatusStore;

@@ -28,6 +28,6 @@ import TransAddress from "./components/TransAddress.vue";
 import TimestampConvert from "./components/TimestampConvert.vue";
 
 defineOptions({
-  name: "DataConversion"
+  name: "DataConversion",
 });
 </script>

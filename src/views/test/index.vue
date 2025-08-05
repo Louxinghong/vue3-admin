@@ -73,7 +73,7 @@
 
 <script lang="ts" setup>
 defineOptions({
-  name: "TestDemo"
+  name: "TestDemo",
 });
 import { ref, computed, watch, customRef, onMounted, onUnmounted, provide } from "vue";
 import { useRouter } from "vue-router";
@@ -86,7 +86,7 @@ import useTable from "@/hooks/useTable";
 const router = useRouter();
 const onShowDetail = () => {
   router.push({
-    name: "TestDetail"
+    name: "TestDetail",
   });
 };
 
@@ -97,11 +97,11 @@ const state = ref({
   userInfo: {
     name: "xiaohong",
     age: 25,
-    gender: "男"
-  }
+    gender: "男",
+  },
 });
 const nameOptions = ref({
-  name: "xiaohong"
+  name: "xiaohong",
 });
 console.log(nameOptions.value.name);
 
@@ -112,8 +112,8 @@ interface EnumOptions {
 const options = ref<EnumOptions[]>([
   {
     label: "123",
-    value: 1
-  }
+    value: 1,
+  },
 ]);
 
 console.log(options.value[0].label);
@@ -127,7 +127,7 @@ const computedEven2 = computed<number>({
   },
   set: (value) => {
     state.value.count = value;
-  }
+  },
 });
 watch(
   () => state.value.count,
@@ -135,8 +135,8 @@ watch(
     console.log(newVal, oldVal);
   },
   {
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 const onAddCount = () => count.value++;
@@ -172,7 +172,7 @@ watch(
   () => x.value + y.value,
   (sum) => {
     console.log(`${x.value} + ${y.value} = ${sum}`);
-  }
+  },
 );
 // 多个来源组成的数组
 watch([x, () => y.value], ([newX, newY]) => {
@@ -188,14 +188,14 @@ const onChangeY = () => {
 const aOptions: CommonConfig.EnumOptions<string, number>[] = [
   {
     label: "1",
-    value: 1
-  }
+    value: 1,
+  },
 ];
 const bOptions: CommonConfig.EnumOptions<string, string>[] = [
   {
     label: "标题1",
-    value: "1"
-  }
+    value: "1",
+  },
 ];
 console.log(aOptions, bOptions);
 
@@ -206,12 +206,12 @@ const getRemoteData = () => {
       resolve([
         {
           label: "小红1号",
-          value: 1
+          value: 1,
         },
         {
           label: "小红2号",
-          value: 2
-        }
+          value: 2,
+        },
       ]);
     }, 3000);
   });
@@ -238,7 +238,7 @@ const calTyp2 = ref<string>("add");
 const { calculateFnOptions: calculateFnOptions2, calculateResult: calculateResult2 } = useCalculate(
   calNum3,
   calNum4,
-  calTyp2.value
+  calTyp2.value,
 );
 calculateFnOptions2(calNum1.value, calNum2.value);
 console.log(calculateResult2);
@@ -265,7 +265,7 @@ const useLocakStorage = (key: string, initialValue: any) => {
       set(newValue: any) {
         localStorage.setItem(key, newValue);
         trigger();
-      }
+      },
     };
   });
 
@@ -290,7 +290,7 @@ const useEventListener = (target: any, event: string, callback: Function) => {
 const useMouse = () => {
   const point = ref({
     x: 0,
-    y: 0
+    y: 0,
   });
   useEventListener(window, "mousemove", (e: any) => {
     point.value.x = e.clientX;
@@ -329,11 +329,11 @@ interface User {
 }
 const userData: User = {
   name: "Linbudu",
-  age: 18
+  age: 18,
 };
 type PartialUser = Partial<User>; // 全变为可选，Required全变为必选
 const partiaUser: PartialUser = {
-  name: "Linbudu"
+  name: "Linbudu",
 };
 
 type UserProps = "name" | "age" | "job";
@@ -341,7 +341,7 @@ type RecordUser = Record<UserProps, string>; // 声明一个内部属性键类�
 const recordUser: RecordUser = {
   name: "Linbudu",
   age: "18",
-  job: "programmer"
+  job: "programmer",
 };
 
 // type UserProps = 'name' | 'age' | 'email' | 'phone' | 'address';
@@ -402,7 +402,7 @@ const searchConfig = [
   {
     prop: "name",
     label: "用户手机号",
-    type: "input"
+    type: "input",
   },
   {
     prop: "post",
@@ -412,17 +412,17 @@ const searchConfig = [
     options: [
       {
         label: "微信",
-        value: "1"
+        value: "1",
       },
       {
         label: "支付宝",
-        value: "2"
+        value: "2",
       },
       {
         label: "其他",
-        value: "3"
-      }
-    ]
+        value: "3",
+      },
+    ],
   },
   {
     prop: "post",
@@ -431,17 +431,17 @@ const searchConfig = [
     options: [
       {
         label: "微信",
-        value: "1"
+        value: "1",
       },
       {
         label: "支付宝",
-        value: "2"
+        value: "2",
       },
       {
         label: "其他",
-        value: "3"
-      }
-    ]
+        value: "3",
+      },
+    ],
   },
   {
     prop: "post",
@@ -450,28 +450,28 @@ const searchConfig = [
     options: [
       {
         label: "微信",
-        value: "1"
+        value: "1",
       },
       {
         label: "支付宝",
-        value: "2"
+        value: "2",
       },
       {
         label: "其他",
-        value: "3"
-      }
-    ]
+        value: "3",
+      },
+    ],
   },
   {
     prop: "date",
     label: "注册日期",
-    type: "dateRange"
+    type: "dateRange",
   },
   {
     prop: "borrowDate",
     label: "最近租借日期",
-    type: "dateRange"
-  }
+    type: "dateRange",
+  },
 ];
 // 搜索表单
 const searchForm = ref<SearchForm>({
@@ -479,7 +479,7 @@ const searchForm = ref<SearchForm>({
   post: "",
   isRead: false,
   date: [],
-  borrowDate: []
+  borrowDate: [],
 });
 // 表格配置
 const tableConfig = [
@@ -487,7 +487,7 @@ const tableConfig = [
     title: "用户编号",
     dataIndex: "userNo",
     align: "center",
-    slotName: "userNo"
+    slotName: "userNo",
   },
   {
     title: "用户手机号",
@@ -496,60 +496,60 @@ const tableConfig = [
       {
         title: "手机号1",
         dataIndex: "phone",
-        align: "center"
+        align: "center",
       },
       {
         title: "手机号2",
         dataIndex: "phone",
-        align: "center"
-      }
-    ]
+        align: "center",
+      },
+    ],
   },
   {
     title: "注册渠道",
     dataIndex: "phone",
     align: "center",
-    filterOptions: "testOptions"
+    filterOptions: "testOptions",
   },
   {
     title: "押金金额",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "状态",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "优惠券",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "累计租借次数",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "最近租借时间",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "最近访问时间",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "注册时间",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "用户来源",
     dataIndex: "phone",
-    align: "center"
+    align: "center",
   },
   {
     title: "操作",
@@ -561,10 +561,10 @@ const tableConfig = [
       {
         label: "编辑",
         type: "primary",
-        methods: "onEdit"
-      }
-    ]
-  }
+        methods: "onEdit",
+      },
+    ],
+  },
 ];
 const onEdit = (rowIndex: any) => {
   console.log(rowIndex);
@@ -584,7 +584,7 @@ type MyPick<T, K extends keyof T> = {
 type TodoPreview = MyPick<Todo, "title" | "completed">;
 const todo: TodoPreview = {
   title: "Clean room",
-  completed: false
+  completed: false,
 };
 </script>
 

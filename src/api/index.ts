@@ -16,8 +16,8 @@ export const getAMapData = (params: CommonConfig.MapParams = {}) => {
     AMapUI: {
       // 是否加载 AMapUI，缺省不加载
       version: params.uiVersion || "1.1", // AMapUI 缺省 1.1
-      plugins: params.uiPlugins || [] // 需要加载的 AMapUI ui插件
-    }
+      plugins: params.uiPlugins || [], // 需要加载的 AMapUI ui插件
+    },
   });
 };
 
@@ -28,8 +28,8 @@ export const getAIData = (message: string) =>
     params: {
       key: "free",
       appid: 0,
-      msg: message
-    }
+      msg: message,
+    },
   });
 
 export const getGptMessage = (params: { content: string }): Promise<ChatGptResult> =>
@@ -40,8 +40,8 @@ export const getGptMessage = (params: { content: string }): Promise<ChatGptResul
       messages: [
         {
           role: "user",
-          content: `${params.content}`
-        }
-      ]
-    }
+          content: `${params.content}`,
+        },
+      ],
+    },
   });

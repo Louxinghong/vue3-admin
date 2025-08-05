@@ -5,7 +5,7 @@
       :data="tableData"
       :bordered="{ cell: true }"
       :scroll="{
-        x: '100%'
+        x: '100%',
       }"
       stripe
       scrollbar

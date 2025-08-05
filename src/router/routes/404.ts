@@ -4,7 +4,7 @@ export const routes = [
     name: "404",
     component: () => import("@/views/404/index.vue"),
     meta: {
-      hidden: true
-    }
-  }
+      hidden: true,
+    },
+  },
 ];

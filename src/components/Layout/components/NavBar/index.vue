@@ -64,7 +64,7 @@ const currentRouteData = computed<CommonConfig.RouterTagViewConfig>(() => {
   const currentRoute = router.currentRoute.value;
   const currentData = {
     title: currentRoute.matched.map((item) => item.meta.title),
-    path: currentRoute.path
+    path: currentRoute.path,
   };
   return currentData;
 });

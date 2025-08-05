@@ -35,7 +35,7 @@ const {
   title = "title",
   draggable = false,
   maskClosable = false,
-  footer = true
+  footer = true,
 } = defineProps<Props>();
 
 const emit = defineEmits<{

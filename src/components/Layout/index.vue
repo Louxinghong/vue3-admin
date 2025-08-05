@@ -3,7 +3,7 @@
     :class="[
       'layout',
       `layout${isCollapsed ? '' : '-no'}-collapsed`,
-      isMobile ? 'layout-mobile' : ''
+      isMobile ? 'layout-mobile' : '',
     ]"
   >
     <div

@@ -23,7 +23,7 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {
   btnName: "上传文件",
-  showFileList: false
+  showFileList: false,
 });
 
 const readFile = (file: any) => {
@@ -32,13 +32,13 @@ const readFile = (file: any) => {
     fileReader.readAsBinaryString(file);
     fileReader.onload = (e) => {
       const workbook = XLSX.read(e.target?.result, {
-        type: "binary"
+        type: "binary",
       });
       const result: Array<ExcelFileResult> = [];
       workbook.SheetNames.map((item) => {
         result.push({
           sheetName: item,
-          sheetList: XLSX.utils.sheet_to_json(workbook.Sheets[item])
+          sheetList: XLSX.utils.sheet_to_json(workbook.Sheets[item]),
         });
       });
       resolve(result);

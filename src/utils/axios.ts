@@ -2,7 +2,7 @@ import axios from "axios";
 import { Message } from "@arco-design/web-vue";
 
 const service = axios.create({
-  timeout: 30000
+  timeout: 30000,
 });
 
 service.interceptors.request.use(
@@ -16,7 +16,7 @@ service.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 service.interceptors.response.use(
@@ -26,7 +26,7 @@ service.interceptors.response.use(
   (error) => {
     Message.error(error);
     return Promise.reject(error);
-  }
+  },
 );
 
 export default service;
