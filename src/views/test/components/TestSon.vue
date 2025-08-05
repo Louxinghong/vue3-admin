@@ -12,8 +12,12 @@
   </div>
 </template>
 
-<script name="TestSon" lang="ts" setup>
+<script lang="ts" setup>
 import { watch, onWatcherCleanup } from "vue";
+
+defineOptions({
+  name: "TestSon",
+});
 
 // 父传子
 interface Props {
@@ -34,7 +38,7 @@ const propCountWatch = watch(
     //   console.log("清理定时器");
     //   clearInterval(timer);
     // });
-  }
+  },
 );
 
 // 子调父方法
@@ -46,6 +50,6 @@ const onDeleteCount = () => emit("update:count", count - 1);
 // 通过将字符串作为第一个参数传递给 defineModel() 来支持相应的参数
 const testSonCount = defineModel("testSonCount", {
   type: Number,
-  default: 0
+  default: 0,
 });
 </script>

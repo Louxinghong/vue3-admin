@@ -7,14 +7,7 @@ import ArcoVue from "@arco-design/web-vue";
 import "@arco-design/web-vue/dist/arco.less";
 import "./style/common.less";
 import "virtual:svg-icons-register";
-
-router.beforeEach((to, from, next) => {
-  if (!to.matched || to.matched.length === 0) {
-    next("/404");
-  } else {
-    next();
-  }
-});
+import "@/utils/permission";
 
 const app = createApp(App);
 // 注册全局组件

@@ -82,25 +82,29 @@ import {
   gcj02ToBd09,
   gcj02ToWgs84,
   bd09ToWgs84,
-  bd09ToGcj02
+  bd09ToGcj02,
 } from "@/utils/mapUtils";
 import { Message } from "@arco-design/web-vue";
+
+defineOptions({
+  name: "CoordinateConvert",
+});
 
 const coordinateSingleOrBatch = ref<string>("single"); // 坐标转换单量或批量
 const coordinateType = ref<string>(""); // 初始坐标类型
 const coordinateOptions = ref([
   {
     label: "WGS84(国际通用)",
-    value: "wgs84"
+    value: "wgs84",
   },
   {
     label: "BD09(百度地图)",
-    value: "bd09"
+    value: "bd09",
   },
   {
     label: "GCJ02(高德、QQ地图)",
-    value: "gcj02"
-  }
+    value: "gcj02",
+  },
   // {
   //   label: 'CGCS2000(2000国家大地坐标)',
   //   value: 'cgcs2000'
@@ -115,7 +119,7 @@ const singleCoordinateResult = ref<coordinateList>({
   wgs84: "",
   gcj02: "",
   bd09: "",
-  address: ""
+  address: "",
   // cgcs2000: ''
 });
 // 批量经纬度
@@ -144,31 +148,31 @@ const onConvertCoordinate = async () => {
       case "wgs84":
         singleCoordinateResult.value.gcj02 = wgs84ToGcj02(
           Number(transformCoordinate[0]),
-          Number(transformCoordinate[1])
+          Number(transformCoordinate[1]),
         ).join(",");
         singleCoordinateResult.value.bd09 = wgs84ToBd09(
           Number(transformCoordinate[0]),
-          Number(transformCoordinate[1])
+          Number(transformCoordinate[1]),
         ).join(",");
         break;
       case "gcj02":
         singleCoordinateResult.value.wgs84 = gcj02ToWgs84(
           Number(transformCoordinate[0]),
-          Number(transformCoordinate[1])
+          Number(transformCoordinate[1]),
         ).join(",");
         singleCoordinateResult.value.bd09 = gcj02ToBd09(
           Number(transformCoordinate[0]),
-          Number(transformCoordinate[1])
+          Number(transformCoordinate[1]),
         ).join(",");
         break;
       case "bd09":
         singleCoordinateResult.value.wgs84 = bd09ToWgs84(
           Number(transformCoordinate[0]),
-          Number(transformCoordinate[1])
+          Number(transformCoordinate[1]),
         ).join(",");
         singleCoordinateResult.value.gcj02 = bd09ToGcj02(
           Number(transformCoordinate[0]),
-          Number(transformCoordinate[1])
+          Number(transformCoordinate[1]),
         ).join(",");
         break;
       default:
@@ -191,21 +195,21 @@ const onConvertCoordinate = async () => {
         result = initialBatchCoordinate.value
           .split("\n")
           .map((item) =>
-            wgs84ToBd09(Number(item.split(",")[0]), Number(item.split(",")[1])).join(",")
+            wgs84ToBd09(Number(item.split(",")[0]), Number(item.split(",")[1])).join(","),
           );
         break;
       case "gcj02":
         result = initialBatchCoordinate.value
           .split("\n")
           .map((item) =>
-            gcj02ToBd09(Number(item.split(",")[0]), Number(item.split(",")[1])).join(",")
+            gcj02ToBd09(Number(item.split(",")[0]), Number(item.split(",")[1])).join(","),
           );
         break;
       case "bd09":
         result = initialBatchCoordinate.value
           .split("\n")
           .map((item) =>
-            bd09ToGcj02(Number(item.split(",")[0]), Number(item.split(",")[1])).join(",")
+            bd09ToGcj02(Number(item.split(",")[0]), Number(item.split(",")[1])).join(","),
           );
         break;
       default:

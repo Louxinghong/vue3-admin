@@ -30,6 +30,10 @@ import { ref, onMounted } from "vue";
 import { customGetAddress } from "@/utils/mapUtils";
 import { getAMapData } from "@/api/index";
 
+defineOptions({
+  name: "TransAddress",
+});
+
 let AMap: any = {};
 onMounted(async () => {
   AMap = await getAMapData();
@@ -49,7 +53,7 @@ const coordinateToAddress = async () => {
       } else {
         addressList.value += `\n${result}`;
       }
-    })
+    }),
   );
 };
 </script>

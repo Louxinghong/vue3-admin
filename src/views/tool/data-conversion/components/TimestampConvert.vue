@@ -21,6 +21,10 @@
 import { ref } from "vue";
 import dayjs from "dayjs";
 
+defineOptions({
+  name: "TimestampConvert",
+});
+
 const convertType = ref<number>(0);
 const dateString = ref<string>("");
 const timestamp = ref<string>("");

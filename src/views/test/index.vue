@@ -1,5 +1,7 @@
 <template>
   <div class="test">
+    <a-button @click="onShowDetail">查看详情</a-button>
+
     <div class="test-one">
       <a-button @click="onAddCount">给我+1</a-button>
       <test-son v-model:count="count" v-model:testSonCount="testSonCount" @addCount="onAddCount">
@@ -69,13 +71,24 @@
   </div>
 </template>
 
-<script name="TestDemo" lang="ts" setup>
+<script lang="ts" setup>
+defineOptions({
+  name: "TestDemo"
+});
 import { ref, computed, watch, customRef, onMounted, onUnmounted, provide } from "vue";
+import { useRouter } from "vue-router";
 import TestSon from "./components/TestSon.vue";
 import { getAIData } from "@/api/index";
 import useCalculate from "@/hooks/useCalculate";
 import WaterfallFlow from "./components/WaterfallFlow.vue";
 import useTable from "@/hooks/useTable";
+
+const router = useRouter();
+const onShowDetail = () => {
+  router.push({
+    name: "TestDetail"
+  });
+};
 
 const count = ref<number>(12);
 const testSonCount = ref<number>(24);

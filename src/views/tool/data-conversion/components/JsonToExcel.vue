@@ -21,6 +21,10 @@ import { ref } from "vue";
 import * as XLSX from "xlsx";
 import { ExcelFileResult } from "@/utils/interface";
 
+defineOptions({
+  name: "JsonToExcel",
+});
+
 const fileNumType = ref<string>("single");
 const jsonToExcelData = ref<string>("");
 const onConvertJsonToExcel = () => {

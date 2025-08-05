@@ -30,11 +30,15 @@
   </div>
 </template>
 
-<script name="ChatAI" lang="ts" setup>
+<script lang="ts" setup>
 import { ref, useTemplateRef } from "vue";
 import { getGptMessage } from "@/api/index";
 import { ChatData } from "@/utils/interface";
 import { cloneDeep } from "lodash-es";
+
+defineOptions({
+  name: "ChatAI",
+});
 
 const loading = ref<boolean>(false);
 const sendMessage = ref<string>(""); // 每次发送的信息
@@ -54,14 +58,14 @@ const onSendMessage = async () => {
   messageList.value.push({
     id: messageList.value.length + 1,
     avatar: USER_IMG,
-    content: sendData
+    content: sendData,
   });
   // 预设骨架内容
   messageList.value.push({
     id: messageList.value.length + 1,
     avatar: "dashboard",
     content: "",
-    isLoading: true
+    isLoading: true,
   });
   // 暂缓等待最新两天信息加入dom
   setTimeout(() => {

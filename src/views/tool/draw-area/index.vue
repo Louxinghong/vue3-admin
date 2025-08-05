@@ -25,10 +25,14 @@
   </div>
 </template>
 
-<script name="DrawArea" lang="ts" setup>
+<script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import { getAMapData } from "@/api/index";
 import { Message, Notification } from "@arco-design/web-vue";
+
+defineOptions({
+  name: "DrawArea"
+});
 
 const drawAreaLoading = ref<boolean>(false); // 编辑loading
 const showAreaConfigDialog = ref<boolean>(false); // 显示区域配置弹窗

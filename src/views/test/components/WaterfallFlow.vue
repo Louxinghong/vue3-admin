@@ -6,14 +6,18 @@
       ref="flowItem"
       class="flow-item"
       :style="{
-        gridRowEnd: `span ${(item % 2 === 0 ? 50 : 100) / 2}`
+        gridRowEnd: `span ${(item % 2 === 0 ? 50 : 100) / 2}`,
       }"
     ></div>
   </div>
 </template>
 
-<script name="WaterfallFlow" lang="ts" setup>
+<script lang="ts" setup>
 import { onMounted, useTemplateRef } from "vue";
+
+defineOptions({
+  name: "WaterfallFlow",
+});
 
 const flowItemRefs = useTemplateRef("flowItem");
 onMounted(() => {

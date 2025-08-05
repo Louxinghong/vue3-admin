@@ -15,6 +15,10 @@ import { ref, shallowRef, onMounted } from "vue";
 import { getAMapData } from "@/api/index";
 import PointInfo from "./components/PointInfo.vue";
 
+defineOptions({
+  name: "CoordinatePoint",
+});
+
 const map = shallowRef<any>({});
 let AMap: any = {};
 onMounted(async () => {
@@ -22,7 +26,7 @@ onMounted(async () => {
   map.value = new AMap.Map("map-container", {
     zoom: 11, // 级别
     center: [116.397428, 39.90923], // 中心点坐标
-    viewMode: "2D" // 使用3D视图
+    viewMode: "2D", // 使用3D视图
   });
 });
 
@@ -46,10 +50,10 @@ const onDrawPoint = (params: Array<lngLatData>) => {
           size: new AMap.Size(36, 36),
           image: new URL("@/assets/images/point-marker.png", import.meta.url).href,
           imageSize: new AMap.Size(36, 36),
-          imageOffset: new AMap.Pixel(0, 0)
+          imageOffset: new AMap.Pixel(0, 0),
         }),
         position: [item.lng, item.lat],
-        offset: new AMap.Pixel(-18, -36)
+        offset: new AMap.Pixel(-18, -36),
       });
       markers.value.push(marker.value);
     }

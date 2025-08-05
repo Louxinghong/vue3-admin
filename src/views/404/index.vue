@@ -16,8 +16,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRouter } from "vue-router";
+
+defineOptions({
+  name: "404",
+});
 
 const router = useRouter();
 const onBackDashboard = () => {

@@ -60,6 +60,10 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
+defineOptions({
+  name: "PointInfo",
+});
+
 interface lngLatData {
   lng: string;
   lat: string;
@@ -67,13 +71,13 @@ interface lngLatData {
 const manualInputList = ref<Array<lngLatData>>([
   {
     lng: "",
-    lat: ""
-  }
+    lat: "",
+  },
 ]);
 const onAddManualInputList = () => {
   manualInputList.value.push({
     lng: "",
-    lat: ""
+    lat: "",
   });
 };
 const onDeleteManualInputList = (index: number) => {
@@ -103,9 +107,9 @@ const onUploadFile = (list: Array<batchLngLatData>) => {
       return {
         address: item.address,
         lng: item.coordinate.split(",")[0],
-        lat: item.coordinate.split(",")[1]
+        lat: item.coordinate.split(",")[1],
       };
-    })
+    }),
   );
 };
 </script>

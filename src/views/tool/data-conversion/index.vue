@@ -26,4 +26,8 @@ import JsonToExcel from "./components/JsonToExcel.vue";
 import CoordinateConvert from "./components/CoordinateConvert.vue";
 import TransAddress from "./components/TransAddress.vue";
 import TimestampConvert from "./components/TimestampConvert.vue";
+
+defineOptions({
+  name: "DataConversion"
+});
 </script>

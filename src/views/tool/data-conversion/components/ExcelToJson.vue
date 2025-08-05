@@ -10,6 +10,10 @@
 import { ref } from "vue";
 import JsonViewer from "vue-json-viewer";
 
+defineOptions({
+  name: "ExcelToJson",
+});
+
 const jsonResult = ref<Array<[]>>([]);
 const onUploadFile = (list: []) => {
   console.log(JSON.stringify(list));
