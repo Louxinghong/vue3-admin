@@ -2,8 +2,16 @@
   <div class="test">
     <div class="test-one">
       <a-button @click="onAddCount">给我+1</a-button>
-      <test-son :count="count" @addCount="onAddCount"></test-son>
-
+      <test-son v-model:count="count" v-model:testSonCount="testSonCount" @addCount="onAddCount">
+        <!-- 同时存在默认插槽和具名插槽时 -->
+        <template #default="{ message }">
+          <span>{{ message }}</span>
+        </template>
+        <template #footer>
+          <span>我是footer</span>
+        </template>
+      </test-son>
+      <p>testSonCount: {{ testSonCount }}</p>
       <p>state.count: {{ state.count }}</p>
       <p>computedEven2: {{ computedEven2 }}</p>
       <a-button type="primary" @click="onChangeComputed">改变计算属性</a-button>
@@ -70,6 +78,7 @@ import WaterfallFlow from "./components/WaterfallFlow.vue";
 import useTable from "@/hooks/useTable";
 
 const count = ref<number>(12);
+const testSonCount = ref<number>(24);
 const state = ref({
   count: 1,
   userInfo: {
