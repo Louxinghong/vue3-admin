@@ -18,9 +18,9 @@ declare namespace CommonConfig {
    * @param msg 消息
    * @param success 是否成功
    */
-  interface RequestResult {
+  interface RequestResult<T> {
     code: number;
-    data: any;
+    data: T;
     extra: any;
     msg: string;
     success: boolean;

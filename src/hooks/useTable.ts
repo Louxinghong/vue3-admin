@@ -8,16 +8,16 @@ interface Pagination {
   onChange(size: number, current: number): void;
 }
 
-interface TableResult extends CommonConfig.RequestResult {
-  data: {
-    list: [];
-    page: {
-      size: number;
-      current: number;
-      total: number;
-    };
+interface TableResultData {
+  list: [];
+  page: {
+    size: number;
+    current: number;
+    total: number;
   };
 }
+
+type TableResult = CommonConfig.RequestResult<TableResultData>;
 
 /**
  * @name: useTable
@@ -34,7 +34,7 @@ const useTable = <T>(api: Function, params: T) => {
       pagination.value.size = size;
     },
   });
-  const tableData = ref<Array<any>>([]);
+  const tableData = ref<TableResultData[]>([]);
   const getTableData = async () => {
     loading.value = true;
     const result: TableResult = await api({

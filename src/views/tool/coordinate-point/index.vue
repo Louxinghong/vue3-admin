@@ -75,7 +75,7 @@ const onDrawPoint = (params: Array<lngLatData>) => {
 
 .map-container {
   width: 100%;
-  height: calc(100% - 35px);
+  height: calc(100% - 42px);
   border-radius: 5px;
 }
 </style>

@@ -40,6 +40,8 @@ const {
 
 const emit = defineEmits<{
   (e: "close", val?: boolean, id?: number): void;
+  // 3.3+写法
+  // close: [val?: boolean, id?: number];
 }>();
 // 确认操作
 const onConfirm = () => {

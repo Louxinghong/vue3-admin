@@ -68,6 +68,8 @@
         {{ record }}
       </template>
     </search-table>
+
+    <sider-detail></sider-detail>
   </div>
 </template>
 
@@ -82,6 +84,7 @@ import { getAIData } from "@/api/index";
 import useCalculate from "@/hooks/useCalculate";
 import WaterfallFlow from "./components/WaterfallFlow.vue";
 import useTable from "@/hooks/useTable";
+import SiderDetail from "./components/SiderDetail.vue";
 
 const router = useRouter();
 const onShowDetail = () => {
