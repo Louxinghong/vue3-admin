@@ -6,6 +6,7 @@ import components from "./components";
 import ArcoVue from "@arco-design/web-vue";
 import "@arco-design/web-vue/dist/arco.less";
 import "./style/common.less";
+import "./style/tailwind.css";
 import "virtual:svg-icons-register";
 import "@/utils/permission";
 
