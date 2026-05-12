@@ -1,7 +1,12 @@
 <template>
   <div class="search-table">
-    <search-content :loading="loading" @search="onSearch"></search-content>
-    <table-content :loading="loading" :table-data="tableData">
+    <search-content
+      :loading="loading"
+      :search-config="searchConfig"
+      :search-form="searchForm"
+      @search="onSearch"
+    ></search-content>
+    <table-content :loading="loading" :table-config="tableConfig" :table-data="tableData">
       <template v-for="item in Object.keys(slots)" :key="item" #[item]="{ record }">
         <slot :name="item" :record="record"></slot>
       </template>
@@ -17,18 +22,17 @@ import useTable from "@/hooks/useTable";
 
 const slots = useSlots();
 
-const tableData = ref<any[]>([]);
+const { searchConfig, searchForm, tableConfig } = defineProps<{
+  searchConfig: Array<CommonConfig.SearchConfig>;
+  searchForm: Record<string, any>;
+  tableConfig: Array<CommonConfig.TableColumnConfig>;
+}>();
 
+const { loading, tableData, pagination, getTableData } = useTable<{
+  msg: number;
+}>(() => {}, { msg: 123 });
 // 搜索方法
 const onSearch = async () => {
-  // const { loading, tableData, pagination, getTableData } = useTable<{
-  //   msg: number;
-  // }>(api, { msg: 123 });
-
-  tableData.value = [
-    {
-      phone: "1",
-    },
-  ];
+  getTableData();
 };
 </script>

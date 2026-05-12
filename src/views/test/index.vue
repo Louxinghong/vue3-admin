@@ -59,7 +59,7 @@
     <!-- 可复用性 - 鼠标坐标 -->
     <p>x: {{ point.x }}, y: {{ point.y }}</p>
 
-    <search-table
+    <SearchTable
       :search-config="searchConfig"
       :search-form="searchForm"
       :table-config="tableConfig"
@@ -67,7 +67,7 @@
       <template #userNo="{ record }">
         {{ record }}
       </template>
-    </search-table>
+    </SearchTable>
 
     <sider-detail></sider-detail>
   </div>
@@ -77,7 +77,7 @@
 defineOptions({
   name: "TestDemo",
 });
-import { ref, computed, watch, customRef, onMounted, onUnmounted, provide } from "vue";
+import { ref, computed, watch, customRef, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import TestSon from "./components/TestSon.vue";
 import { getAIData } from "@/api/index";
@@ -564,16 +564,14 @@ const tableConfig = [
       {
         label: "编辑",
         type: "primary",
-        methods: "onEdit",
+        method: (rowIndex: any) => {
+          console.log(rowIndex);
+        },
       },
     ],
   },
 ];
-const onEdit = (rowIndex: any) => {
-  console.log(rowIndex);
-};
-// 数据传送
-provide("provideData", { searchConfig, searchForm, tableConfig, onEdit });
+console.log(searchConfig, searchForm, tableConfig);
 
 // 实现一个Pick方法，从类型T中选择出一组属性K，构造一个新的类型
 interface Todo {

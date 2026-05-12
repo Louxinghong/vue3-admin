@@ -31,7 +31,7 @@
             v-for="(itemAction, actionIndex) in columnConfig.actions"
             :key="`action-${actionIndex}`"
             :type="itemAction.type"
-            @click="onClickAction(itemAction.method, rowIndex)"
+            @click="onClickAction(itemAction.method)"
             >{{ itemAction.label }}</a-button
           >
         </template>
@@ -52,11 +52,9 @@ import * as enumOptions from "@/utils/enumOptions";
 
 const slots = useSlots();
 
-interface Props {
+const { columnConfig } = defineProps<{
   columnConfig: CommonConfig.TableColumnConfig;
-}
-
-const { columnConfig } = defineProps<Props>();
+}>();
 
 // 根据枚举类展示转换后的数据
 const filterDataInOptions = (record: { [key: string]: any }) => {
@@ -71,7 +69,7 @@ const filterDataInOptions = (record: { [key: string]: any }) => {
 };
 
 // 调用最上级编辑方法
-const onClickAction = (method: Function, rowIndex: number) => {
-  method(rowIndex);
+const onClickAction = (method: Function) => {
+  method();
 };
 </script>

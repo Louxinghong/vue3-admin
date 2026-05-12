@@ -1,0 +1,1 @@
+import{d as e,o as t,c as s}from"./index-4f7759eb.js";const a={class:"test-detail"},r=e({name:"TestDetail",__name:"TestDetail",setup(o){return(n,c)=>(t(),s("div",a,"是详情呀是详情"))}});export{r as default};

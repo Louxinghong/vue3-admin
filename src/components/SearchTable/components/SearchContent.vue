@@ -48,18 +48,15 @@
 </template>
 
 <script name="SearchContent" lang="ts" setup>
-import { inject } from "vue";
-
-interface Props {
+const {
+  loading = false,
+  searchConfig,
+  searchForm,
+} = defineProps<{
   loading: boolean;
-}
-
-const { loading = false } = defineProps<Props>();
-// 获取父组件传递的数据
-const { searchForm, searchConfig } = inject<{
   searchForm: Record<string, any>;
   searchConfig: Array<CommonConfig.SearchConfig>;
-}>("provideData")!;
+}>();
 
 // 搜索方法
 const emit = defineEmits(["search"]);

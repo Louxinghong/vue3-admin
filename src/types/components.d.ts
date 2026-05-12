@@ -11,12 +11,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    DialogInfo: typeof import('./../components/DialogInfo/index.vue')['default']
-    FileUpload: typeof import('./../components/FileUpload/index.vue')['default']
-    Layout: typeof import('./../components/Layout/index.vue')['default']
+    DialogInfo: typeof import('./../components/DialogInfo/DialogInfo.vue')['default']
+    FileUpload: typeof import('./../components/FileUpload/FileUpload.vue')['default']
+    Layout: typeof import('./../components/Layout/Layout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchTable: typeof import('./../components/SearchTable/index.vue')['default']
-    SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
+    SvgIcon: typeof import('./../components/SvgIcon/SvgIcon.vue')['default']
   }
 }

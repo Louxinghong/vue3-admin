@@ -12,7 +12,7 @@ export default (): UserConfigExport => {
       vue(),
       tailwindcss(),
       Components({
-        // 使用 glob 匹配所有一级子目录
+        // 文件扩展名
         dirs: ["src/components/*/"],
         // 文件扩展名
         extensions: ["vue"],
@@ -22,10 +22,6 @@ export default (): UserConfigExport => {
         dts: "src/types/components.d.ts",
         // 目录名作为组件名
         directoryAsNamespace: false,
-        // 只匹配 index.vue
-        globs: ["src/components/*/index.vue"],
-        // 排除 views 目录
-        exclude: ["src/views/**"],
       }),
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹

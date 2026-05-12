@@ -22,9 +22,9 @@
 
 <script lang="ts" setup>
 import { onBeforeMount } from "vue";
-import SideBar from "./components/SideBar/index.vue";
-import NavBar from "./components/NavBar/index.vue";
-import MainContainer from "./components/MainContainer/index.vue";
+import SideBar from "./components/SideBar/SideBar.vue";
+import NavBar from "./components/NavBar/NavBar.vue";
+import MainContainer from "./components/MainContainer/MainContainer.vue";
 import useStatusStore from "@/store/modules/status";
 import { storeToRefs } from "pinia";
 

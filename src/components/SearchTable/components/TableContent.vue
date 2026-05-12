@@ -22,19 +22,18 @@
 </template>
 
 <script name="TableContent" lang="ts" setup>
-import { inject, useSlots } from "vue";
+import { useSlots } from "vue";
 import TableItem from "./TableItem.vue";
 
 const slots = useSlots();
 
-interface Props {
+const {
+  loading = false,
+  tableConfig,
+  tableData = [],
+} = defineProps<{
   loading: boolean;
-  tableData: any[];
-}
-const { loading = false, tableData = [] } = defineProps<Props>();
-
-// 获取最上级组件传递的数据
-const { tableConfig } = inject<{
   tableConfig: Array<CommonConfig.TableColumnConfig>;
-}>("provideData")!;
+  tableData: any[];
+}>();
 </script>

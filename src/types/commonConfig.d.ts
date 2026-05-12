@@ -63,16 +63,18 @@ declare namespace CommonConfig {
    */
   interface TableColumnConfig {
     title: string;
-    dataIndex: string;
+    dataIndex?: string;
     align?: string;
     fixed?: string;
+    width?: number;
     type?: string;
     options?: keyof typeof import("@/utils/enumOptions"); // ts中这样导入该模块的类型信息（不会生成实际的代码导入）
     slotName?: string;
+    filterOptions?: string;
     actions?: {
       label: string;
       method: Function;
-      type: "text" | "dashed" | "outline" | "primary" | "secondary" | undefined;
+      type: string;
     }[];
     children?: {
       title: string;
