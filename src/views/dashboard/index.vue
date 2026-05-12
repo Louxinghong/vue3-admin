@@ -6,8 +6,8 @@
       </div>
 
       <div class="lg:col-span-2 space-y-6 bg-[#f0f2f5]">
-        <span class="text-[24px]">456</span>
-        <span class="text-[20px]">456</span>
+        <span class="text-[32px]">456</span>
+        <span class="text-[48px]">456</span>
       </div>
     </div>
 

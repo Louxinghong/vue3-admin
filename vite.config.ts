@@ -3,6 +3,7 @@ import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { resolve } from "path";
 import { UserConfigExport } from "vite"; // 引入 Vite 的 UserConfigExport 类型
 import tailwindcss from "@tailwindcss/vite";
+import Components from "unplugin-vue-components/vite";
 
 // 为默认导出的函数添加类型注释
 export default (): UserConfigExport => {
@@ -10,6 +11,22 @@ export default (): UserConfigExport => {
     plugins: [
       vue(),
       tailwindcss(),
+      Components({
+        // 使用 glob 匹配所有一级子目录
+        dirs: ["src/components/*/"],
+        // 文件扩展名
+        extensions: ["vue"],
+        // 不深度搜索子目录
+        deep: false,
+        // 生成类型声明文件
+        dts: "src/types/components.d.ts",
+        // 目录名作为组件名
+        directoryAsNamespace: false,
+        // 只匹配 index.vue
+        globs: ["src/components/*/index.vue"],
+        // 排除 views 目录
+        exclude: ["src/views/**"],
+      }),
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹
         iconDirs: [resolve(process.cwd(), "src/assets/icons")],
