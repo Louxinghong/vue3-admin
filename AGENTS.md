@@ -83,6 +83,19 @@ src/
 
 路由按功能拆分到 `src/router/routes/` 目录下的文件，在 `src/router/index.ts` 中统一组装。新增路由时在该目录创建文件并导入。
 
+## AI 文档规范
+
+所有 AI 生成的 Markdown 文档必须放在 `.superpowers/` 目录下，按类型分类：
+
+| 目录 | 用途 |
+|---|---|
+| `.superpowers/specs/` | 项目规范、设计文档 |
+| `.superpowers/plans/` | 任务实施计划 |
+| `.superpowers/research/` | 调研报告 |
+| `.superpowers/workflows/` | 工作流脚本 |
+
+禁止在项目根目录或其他位置创建 AI 相关的 `.md` 文件。
+
 ## 构建输出
 
 生产构建输出到 `docs/` 目录（兼容 GitHub Pages），基础路径为 `/vue3-admin/`。
