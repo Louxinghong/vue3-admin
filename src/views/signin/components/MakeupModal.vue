@@ -1,14 +1,14 @@
 <template>
   <a-modal
-    :visible="visible"
+    v-model:visible="modalVisible"
     title="补签"
-    :mask-closable="false"
+    :mask-closable="true"
     :esc-to-close="true"
-    @cancel="onCancel"
+    @close="onClose"
     width="400px"
   >
     <template #footer>
-      <a-button @click="onCancel">取消</a-button>
+      <a-button @click="onClose">取消</a-button>
       <a-button
         type="primary"
         :disabled="!selectedDate || makeupCards <= 0"
@@ -72,13 +72,19 @@ const signinStore = useSigninStore();
 const selectedDate = ref<string | null>(null);
 const makeupCards = computed(() => signinStore.makeupCards);
 
+// Sync with parent via v-model
+const modalVisible = computed({
+  get: () => props.visible,
+  set: (val: boolean) => emit("update:visible", val),
+});
+
 const availableDates = computed(() => {
   const dates: string[] = [];
   const today = dayjs();
   for (let i = 1; i <= 7; i++) {
     const date = today.subtract(i, "day");
     const dateStr = date.format("YYYY-MM-DD");
-    const signed = signinStore.records.get(dateStr);
+    const signed = signinStore.records[dateStr];
     if (!signed) {
       dates.push(dateStr);
     }
@@ -96,9 +102,9 @@ const selectDate = (date: string) => {
   selectedDate.value = date;
 };
 
-const onCancel = () => {
+const onClose = () => {
   selectedDate.value = null;
-  emit("update:visible", false);
+  modalVisible.value = false;
 };
 
 const onConfirm = async () => {

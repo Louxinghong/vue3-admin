@@ -60,7 +60,7 @@ const calendarCells = computed(() => {
     cells.push({
       date: dateStr,
       day,
-      signed: signinStore.records.get(dateStr) ?? false,
+      signed: signinStore.records[dateStr] ?? false,
       isToday: dateStr === now.format("YYYY-MM-DD"),
       isFuture: dateObj.isAfter(now, "day"),
       isEmpty: false,

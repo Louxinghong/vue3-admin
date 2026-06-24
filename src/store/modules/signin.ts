@@ -12,8 +12,8 @@ import {
 const useSigninStore = defineStore(
   "signin",
   () => {
-    // State
-    const records = ref<Map<string, boolean>>(new Map());
+    // State — use Record instead of Map so pinia-plugin-persistedstate serializes correctly
+    const records = ref<Record<string, boolean>>({});
     const streakDays = ref<number>(0);
     const makeupCards = ref<number>(3);
     const points = ref<number>(0);
@@ -29,7 +29,7 @@ const useSigninStore = defineStore(
         const dateStr = now.format(`YYYY-MM-${String(day).padStart(2, "0")}`);
         result.push({
           date: dateStr,
-          signed: records.value.get(dateStr) ?? false,
+          signed: records.value[dateStr] ?? false,
           day,
         });
       }
@@ -38,7 +38,7 @@ const useSigninStore = defineStore(
 
     const isTodaySigned = computed(() => {
       const today = dayjs().format("YYYY-MM-DD");
-      return records.value.get(today) ?? false;
+      return records.value[today] ?? false;
     });
 
     // Actions
@@ -46,11 +46,11 @@ const useSigninStore = defineStore(
       loading.value = true;
       try {
         const data = await getSigninRecords(year, month);
-        const newMap = new Map<string, boolean>();
+        const newRecords: Record<string, boolean> = {};
         data.forEach((r: SigninRecord) => {
-          newMap.set(r.date, r.signed);
+          newRecords[r.date] = r.signed;
         });
-        records.value = newMap;
+        records.value = newRecords;
         calculateStreak();
       } finally {
         loading.value = false;
@@ -67,10 +67,10 @@ const useSigninStore = defineStore(
       let count = 0;
       let date = dayjs();
       // If today is not signed, start from yesterday
-      if (!records.value.get(date.format("YYYY-MM-DD"))) {
+      if (!records.value[date.format("YYYY-MM-DD")]) {
         date = date.subtract(1, "day");
       }
-      while (records.value.get(date.format("YYYY-MM-DD"))) {
+      while (records.value[date.format("YYYY-MM-DD")]) {
         count++;
         date = date.subtract(1, "day");
       }
@@ -87,12 +87,12 @@ const useSigninStore = defineStore(
 
     const doSignin = async () => {
       const today = dayjs().format("YYYY-MM-DD");
-      if (records.value.get(today)) return { success: false, points: 0, streakDays: streakDays.value };
+      if (records.value[today]) return { success: false, points: 0, streakDays: streakDays.value };
 
       loading.value = true;
       try {
         const result = await apiDoSignin();
-        records.value.set(today, true);
+        records.value[today] = true;
         lastSigninDate.value = today;
         calculateStreak();
         const earnedPoints = calculatePoints(streakDays.value, false);
@@ -112,12 +112,12 @@ const useSigninStore = defineStore(
       if (makeupDate.isAfter(today) || makeupDate.isBefore(sevenDaysAgo)) {
         throw new Error("Date out of makeup range");
       }
-      if (records.value.get(date)) throw new Error("Already signed on this date");
+      if (records.value[date]) throw new Error("Already signed on this date");
 
       loading.value = true;
       try {
         await apiDoMakeup(date);
-        records.value.set(date, true);
+        records.value[date] = true;
         makeupCards.value -= 1;
         calculateStreak();
         const earnedPoints = calculatePoints(0, true);
