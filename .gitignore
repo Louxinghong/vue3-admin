@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 .trae
+openspec/changes/
 # dist
 dist-ssr
 *.local
